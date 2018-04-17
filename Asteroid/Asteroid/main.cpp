@@ -1,11 +1,19 @@
+#pragma once
+#include "Asteroid.h"
 #include <SFML/Graphics.hpp>
 //#include <iostream>
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
+	Asteroid a1;
+
+	sf::RenderWindow window(sf::VideoMode(500, 500), "SFML works!");
 	sf::CircleShape shape(100.f);
+	
+	
+	
 	shape.setFillColor(sf::Color::Green);
+	
 
 	while (window.isOpen())
 	{
@@ -18,8 +26,10 @@ int main()
 
 		window.clear();
 		window.draw(shape);
+		// a1.getBody().move(1, 1);
+		window.draw(a1.getBody());
 		window.display();
 	}
-
+	
 	return 0;
 }
