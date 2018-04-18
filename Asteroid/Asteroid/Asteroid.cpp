@@ -7,26 +7,25 @@ using std::endl;
 
 Asteroid::Asteroid()
 {
-	sf::Texture t;
-	if (!t.loadFromFile("asteroid-texture.png"))
-	{
-		cout << "Texture not loaded." << endl;
-	}
-	else
-	{
-		cout << "Texture loaded." << endl;
-	}
-	mBody.setTexture(t);
-	mBody.setPosition(25, 30);
-	//mBody.setScale(.1, .1);
+		mText = new sf::Texture();
+
+		mText->loadFromFile("asteroid-texture.png");
+
+		mBody.setTexture(*mText);
 }
 
-Asteroid::Asteroid(sf::Texture & texture)
+Asteroid::Asteroid(sf::Texture * texture)
 {
-	mBody.setTexture(texture);
+	mBody.setTexture(*texture);
+	mText = texture;
 }
 
 sf::Sprite & Asteroid::getBody()
 {
 	return mBody;
+}
+
+Asteroid::~Asteroid()
+{
+	delete mText;
 }

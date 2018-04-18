@@ -6,9 +6,11 @@ class Asteroid
 {
 public:
 	Asteroid();
-	Asteroid(sf::Texture & texture);
+	Asteroid(sf::Texture * texture);
+	~Asteroid();
 
 	sf::Sprite & getBody();
 private:
 	sf::Sprite mBody;
+	sf::Texture *mText;
 };

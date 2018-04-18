@@ -10,7 +10,7 @@ int main()
 	sf::RenderWindow window(sf::VideoMode(500, 500), "SFML works!");
 	sf::CircleShape shape(100.f);
 	
-	
+	//system("dir");
 	
 	shape.setFillColor(sf::Color::Green);
 	
@@ -25,8 +25,7 @@ int main()
 		}
 
 		window.clear();
-		window.draw(shape);
-		// a1.getBody().move(1, 1);
+		//window.draw(shape);
 		window.draw(a1.getBody());
 		window.display();
 	}
