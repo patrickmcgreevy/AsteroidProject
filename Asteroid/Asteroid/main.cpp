@@ -27,6 +27,7 @@ int main()
 		window.clear();
 		//window.draw(shape);
 		window.draw(a1.getBody());
+		a1.getBody().move(a1.getSlope());
 		window.display();
 	}
 	
