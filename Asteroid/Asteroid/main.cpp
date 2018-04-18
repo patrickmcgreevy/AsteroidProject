@@ -34,7 +34,8 @@ int main()
 		window.draw(s1.getBody());
 		//window.draw(a2.getBody());
 		a1.getBody().move(a1.getSlope());
-		s1.rotateCW();
+		//s1.rotateCW();
+		s1.move();
 		window.display();
 	}
 	
