@@ -157,6 +157,8 @@
   <ItemGroup>
     <ClInclude Include="Asteroid.h" />
     <ClInclude Include="Ship.h" />
+    <ClInclude Include="StackNodeTemplate.h" />
+    <ClInclude Include="StackTemplate.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="asteroid-texture.png" />
