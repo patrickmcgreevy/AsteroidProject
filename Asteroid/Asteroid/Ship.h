@@ -15,6 +15,9 @@ public:
 	void updateSlope();
 	void swapTexture();
 
+	sf::Vector2f & getSlope();
+	const sf::Vector2f & getPos();
+
 	void move();
 
 	void rotateCW(); // Rotate clock wise about the center of the ship; currently not working as intended

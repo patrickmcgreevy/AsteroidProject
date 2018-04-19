@@ -31,6 +31,15 @@ sf::Sprite & Ship::getBody()
 	return mBody;
 }
 
+sf::Vector2f & Ship::getSlope()
+{
+	return mSlope;
+}
+const sf::Vector2f & Ship::getPos()
+{
+	return mBody.getPosition();
+}
+
 void Ship::updateSlope(double theta) // theta is in degrees
 {
 	theta = theta * (M_PI / 180); // conversion to radians

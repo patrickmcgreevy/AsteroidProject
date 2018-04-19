@@ -24,6 +24,9 @@
     <ClCompile Include="Ship.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Laser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Asteroid.h">
@@ -38,12 +41,18 @@
     <ClInclude Include="StackTemplate.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Laser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="asteroid-texture.png">
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="ship-base-texture.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="laser-texture.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
