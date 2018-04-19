@@ -13,7 +13,7 @@ int main()
 
 	sf::RenderWindow window(sf::VideoMode(500, 500), "Asteroid Test.");
 	sf::CircleShape shape(100.f);
-	
+	std::cout << "yo";
 	//system("dir");
 	
 	shape.setFillColor(sf::Color::Green);
