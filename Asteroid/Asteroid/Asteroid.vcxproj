@@ -156,6 +156,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Asteroid.h" />
+    <ClInclude Include="List.h" />
+    <ClInclude Include="ListNode.h" />
     <ClInclude Include="Ship.h" />
     <ClInclude Include="StackNodeTemplate.h" />
     <ClInclude Include="StackTemplate.h" />
