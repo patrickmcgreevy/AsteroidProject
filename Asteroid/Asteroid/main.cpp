@@ -12,11 +12,6 @@ int main()
 	//Asteroid a2(a1.getBody().getTexture(), a1.getBody().getScale());
 
 	sf::RenderWindow window(sf::VideoMode(500, 500), "Asteroid Test.");
-	sf::CircleShape shape(100.f);
-	std::cout << "yo";
-	//system("dir");
-	
-	shape.setFillColor(sf::Color::Green);
 	
 
 	while (window.isOpen())
