@@ -39,6 +39,20 @@ sf::Vector2f & Asteroid::getSlope()
 	return mSlope;
 }
 
+void Asteroid::updateSlope(double theta)
+{
+	theta = theta * (M_PI / 180);
+	mSlope.y = cos(theta);
+	mSlope.x = sin(theta);
+}
+
+void Asteroid::updateSlope()
+{
+	double theta = mBody.getRotation() * (M_PI / 180);
+	mSlope.y = cos(theta);
+	mSlope.x = sin(theta);
+}
+
 Asteroid::~Asteroid()
 {
 	delete mText;

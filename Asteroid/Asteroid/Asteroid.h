@@ -1,6 +1,8 @@
 #pragma once
+#define _USE_MATH_DEFINES
 #include <SFML/Graphics.hpp>
 #include <SFML/Graphics/Sprite.hpp>
+#include <cmath>
 #include <iostream>
 #include <random>
 
@@ -13,6 +15,9 @@ public:
 
 	sf::Sprite & getBody();
 	sf::Vector2f & getSlope();
+
+	void updateSlope(double theta); // For setting direction of the mini stroids
+	void updateSlope(); // Don't call
 private:
 	sf::Sprite mBody;
 	sf::Texture *mText;
