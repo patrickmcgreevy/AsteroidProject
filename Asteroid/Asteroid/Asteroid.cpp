@@ -20,6 +20,17 @@ Asteroid::Asteroid()
 	cout << "Slope: " << mSlope.x << ", " << mSlope.y << endl;
 }
 
+Asteroid::Asteroid(sf::Texture * texture) // Pass in pointer to spawning asteroid's texture and the asteroid's sprite's vector
+{
+	mBody.setTexture(*texture);
+	mText = texture;
+
+	// Sets the slope to a random vector w/ dX and dY less than 1
+	mSlope.x = (float)(rand() % 1000) / SLOPE_DIVISOR;
+	mSlope.y = (float)(rand() % 1000) / SLOPE_DIVISOR;
+	cout << "Slope: " << mSlope.x << ", " << mSlope.y << endl;
+}
+
 // For creating a smaller asteroid upon the destruction of the bigger one
 Asteroid::Asteroid(sf::Texture * texture, sf::Vector2f & size) // Pass in pointer to spawning asteroid's texture and the asteroid's sprite's vector
 {
@@ -55,5 +66,5 @@ void Asteroid::updateSlope()
 
 Asteroid::~Asteroid()
 {
-	delete mText;
+	//delete mText;
 }

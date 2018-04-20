@@ -2,16 +2,22 @@
 #include "Asteroid.h"
 #include "Ship.h"
 #include "Laser.h"
+#include "List.h"
 #include <SFML/Graphics.hpp>
 //#include <iostream>
 
 int main()
 {
-	Asteroid a1;
-	Ship s1;
-	
-
 	sf::Texture * pLaserTexture = new sf::Texture();
+	sf::Texture * pAsteroidTexture = new sf::Texture();
+	pAsteroidTexture->loadFromFile("asteroid-texture.png");
+
+	Asteroid a1(pAsteroidTexture);
+	Ship s1;
+	List<Asteroid> astList;
+	
+	astList.insertAtFront(a1);
+
 
 	pLaserTexture->loadFromFile("laser-texture.png");
 	//Asteroid a2(a1.getBody().getTexture(), a1.getBody().getScale());
@@ -43,5 +49,8 @@ int main()
 		window.display();
 	}
 	
+	delete pAsteroidTexture;
+	delete pLaserTexture;
+
 	return 0;
 }

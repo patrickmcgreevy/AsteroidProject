@@ -1,23 +1,24 @@
-#include "Asteroid.h"
+//#include "Asteroid.h"
+#pragma once
 
 template <class t>
 class node {
 public:
 	node();
-	node(node& newNode);
+	node(t & newData);
 	~node();
 
 	void setNext(node* newNext);
 	void setPrev(node* newPrev);
-	void setT(t* newt);
-	t* getT();
-	node* getNext();
-	node* getPrev();
+	void setData(t & newt);
+	t & getData();
+	node<t>* getNext();
+	node<t>* getPrev();
 	
 private:
-	t* data;
-	node* mpNext;
-	node* mpPrev;
+	t data;
+	node<t>* mpNext;
+	node<t>* mpPrev;
 };
 
 template <class t>
@@ -27,18 +28,20 @@ node<t>::node() {
 }
 
 template <class t>
-node<t>::node(node* newNode) {
-	data = newNode.gett();
-	mpNext = newNode.getNext();
-	mpPrev = newNode.getPrev();
+node<t>::node(t & newData)
+{
+	data = newData;
+	mpNext = nullptr;
+	mpPrev = nullptr;
 }
 
 template <class t>
 node<t>::~node() {
-	// no dynamic data
+	std::cout << "Inside node destructor." << std::endl;
 	if (mpPrev != nullptr) {
 		mpPrev->setNext(mpNext);
 	}
+
 	if (mpNext != nullptr) {
 		mpNext->setNext(mpPrev);
 	}
@@ -50,16 +53,29 @@ void node<t>::setNext(node* newNext) {
 }
 
 template <class t>
-void node<t>::setT(t* newT) {
+void node<t>::setPrev(node* newPrev)
+{
+	mpPrev = newPrev;
+}
+
+template <class t>
+void node<t>::setData(t & newT) {
 	data = newT;
 }
 
 template <class t>
-t* node<t>::getT() {
-	return mt;
+t & node<t>::getData()
+{
+	return data;
 }
 
 template <class t>
-node* node<t>::getNext() {
+node<t>* node<t>::getNext() {
 	return mpNext;
+}
+
+template <class t>
+node<t>* node<t>::getPrev()
+{
+	return mpPrev;
 }
