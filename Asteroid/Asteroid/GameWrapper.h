@@ -5,5 +5,8 @@
 
 class GameWrapper
 {
-
+public:
+	GameWrapper();
+	~GameWrapper();
+private:
 };
