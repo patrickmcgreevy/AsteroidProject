@@ -25,9 +25,8 @@ int main()
 	sf::RenderWindow window(sf::VideoMode(500, 500), "Asteroid Test.");
 
 	Laser l1(pLaserTexture, s1.getSlope(), s1.getPos());
-	Laser* l2 = nullptr;
-	Laser l3(pLaserTexture, s1.getSlope(), s1.getPos());
-	bool kp = false; // key pressed bool
+
+	bool kp = false, wPressed = false, aPressed = false, dPressed = false; // key pressed bool
 	int forwardMotion = 0; // position updater
 	int cwRotate = 0;
 	sf::Vector2f shipCenter(s1.getPos().x + 18, s1.getPos().y);
@@ -38,9 +37,11 @@ int main()
 		while (window.pollEvent(event))
 		{
 			if (event.type == sf::Event::Closed)
+			{
 				window.close();
+			}
 
-			if (event.type == sf::Event::KeyPressed) // key pressed loop from aofallon
+			else if (event.type == sf::Event::KeyPressed) // key pressed loop from aofallon
 			{
 				kp = true;
 				if (event.key.code == sf::Keyboard::Space)
@@ -55,33 +56,65 @@ int main()
 				if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 				{
 					forwardMotion += 2;
-
+					wPressed = true;
 				}
-			}
-			if (event.type == sf::Event::KeyPressed)
-			{
-				kp = true;
+				else
+				{
+					wPressed = false;
+				}
+
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+				{
+					dPressed = true;
+				}
+				else
+				{
+					dPressed = false;
+				}
+
 				if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 				{
-					cwRotate += 5;
-					
+					aPressed = true;
+				}
+				else
+				{
+					aPressed = false;
 				}
 			}
+			//if (event.type == sf::Event::KeyPressed)
+			//{
+			//	kp = true;
+			//	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+			//	{
+			//		cwRotate += 5;
+			//		
+			//	}
+			//}
 			if (event.type == sf::Event::KeyReleased)
 			{
-				kp = false;
+				if()
+				//kp = false;
 			} // end of key stuff borught in
 		}
 
 		window.clear();
-		if (l2 != nullptr) {
-			window.draw(l2->getBody());
-			l2->move();
+
+		if (wPressed)
+		{
+			s1.move();
 		}
-		for (int i = 0; i < forwardMotion; i++)
+		if (dPressed)
+		{
+			s1.rotateCW();
+		}
+		if (aPressed)
+		{
+			s1.rotateCounterCW();
+		}
+		/*for (int i = 0; i < forwardMotion; i++)
 			s1.move();
 		for (int i = 0; i < cwRotate; i++)
-			s1.rotateCW();
+			s1.rotateCW()*/;
 		l1.move();
 
 		window.draw(l1.getBody());
