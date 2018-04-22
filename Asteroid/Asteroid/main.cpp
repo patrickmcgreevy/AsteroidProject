@@ -25,7 +25,7 @@ int main()
 	sf::RenderWindow window(sf::VideoMode(500, 500), "Asteroid Test.");
 
 	Laser l1(pLaserTexture, s1.getSlope(), s1.getPos());
-
+	Laser* l2 = nullptr;
 	bool kp = false, wPressed = false, aPressed = false, dPressed = false; // key pressed bool
 	int forwardMotion = 0; // position updater
 	int cwRotate = 0;
@@ -92,7 +92,7 @@ int main()
 			//}
 			if (event.type == sf::Event::KeyReleased)
 			{
-				if()
+				//if()
 				//kp = false;
 			} // end of key stuff borught in
 		}
