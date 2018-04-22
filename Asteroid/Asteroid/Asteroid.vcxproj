@@ -151,6 +151,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Asteroid.cpp" />
+    <ClCompile Include="GameWrapper.cpp" />
     <ClCompile Include="Laser.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Ship.cpp" />
@@ -166,7 +167,12 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="asteroid-texture.png" />
+    <Image Include="border-texture.png" />
+    <Image Include="laser-texture.png" />
     <Image Include="ship-base-texture.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="Roboto-Regular.ttf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

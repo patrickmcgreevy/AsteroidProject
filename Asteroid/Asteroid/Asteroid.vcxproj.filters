@@ -27,6 +27,9 @@
     <ClCompile Include="Laser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GameWrapper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Asteroid.h">
@@ -58,5 +61,16 @@
     <Image Include="ship-base-texture.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="border-texture.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="laser-texture.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="Roboto-Regular.ttf">
+      <Filter>Resource Files</Filter>
+    </Font>
   </ItemGroup>
 </Project>

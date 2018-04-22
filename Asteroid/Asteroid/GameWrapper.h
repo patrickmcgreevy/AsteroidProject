@@ -10,13 +10,15 @@ public:
 	GameWrapper();
 	~GameWrapper();
 
+	void runGame();
+
 	void splitAsteroid(Asteroid * oldAst); // Makes two new asteroids based on the parameter asteroid
 	bool checkSplit(Asteroid * oldAst); // Returns true or false depending on 
 	
 	bool checkCollision(Laser * laser, Asteroid * asteroid);
 	bool checkCollision(Ship * ship, Asteroid * asteroid);
 
-	void drawBorder(int score, int lives, sf::Texture * pText);
+	//void drawBorder(int score, int lives, sf::Texture * pText, sf::Font * pFont, sf::RenderWindow & window);
 private:
 	sf::Texture * mpAstText;
 	sf::Texture * mpLaserText;

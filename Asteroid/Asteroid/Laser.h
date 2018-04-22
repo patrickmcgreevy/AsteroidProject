@@ -9,7 +9,7 @@ public:
 
 	sf::Sprite & getBody();
 
-	void move();
+	void move(); // shit works
 private:
 	sf::Sprite mBody;
 	sf::Texture *mpText;

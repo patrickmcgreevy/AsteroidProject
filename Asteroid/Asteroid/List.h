@@ -12,6 +12,8 @@ public:
 
 	void insertAtFront(T & newData);
 
+	bool isEmpty();
+
 private:
 	void destrucorHelper();
 
@@ -55,6 +57,16 @@ void List<T>::destrucorHelper()
 
 		delete pCur;
 	}
+}
+
+template <class T>
+bool List<T>::isEmpty()
+{
+	if (mpHead != nullptr)
+	{
+		return true;
+	}
+	return false;
 }
 
 template <class T>
