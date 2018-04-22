@@ -18,6 +18,9 @@ public:
 	bool checkCollision(Laser * laser, Asteroid * asteroid);
 	bool checkCollision(Ship * ship, Asteroid * asteroid);
 
+	void refreshLevel(int n, sf::Texture * pText); // creates 4 + n asteroids in four off screen locations
+	void drawAsteroidList(sf::RenderWindow & w);
+
 	//void drawBorder(int score, int lives, sf::Texture * pText, sf::Font * pFont, sf::RenderWindow & window);
 private:
 	sf::Texture * mpAstText;
