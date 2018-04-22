@@ -47,7 +47,7 @@
     <ClInclude Include="ListNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Game.h">
+    <ClInclude Include="GameWrapper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

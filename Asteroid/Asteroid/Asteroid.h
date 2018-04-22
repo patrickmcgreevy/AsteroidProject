@@ -9,7 +9,8 @@
 class Asteroid 
 {
 public:
-	Asteroid();
+	Asteroid(); // For tests. don't call. destructor doesnt work anymore
+	Asteroid(sf::Texture * texture);
 	Asteroid(sf::Texture * texture, sf::Vector2f & size);
 	~Asteroid();
 
