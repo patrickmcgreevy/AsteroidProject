@@ -41,23 +41,24 @@ int main()
 			if (event.type == sf::Event::KeyPressed) // key pressed loop from aofallon
 			{
 				kp = true;
-				if (event.key.code == sf::Keyboard::W)
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 				{
-					forwardMotion += 5;
+					forwardMotion += 2;
+
 				}
 			}
 			if (event.type == sf::Event::KeyPressed)
 			{
 				kp = true;
-				if (event.key.code == sf::Keyboard::A)
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 				{
-					cwRotate += 1;
+					cwRotate += 5;
+					
 				}
 			}
 			if (event.type == sf::Event::KeyReleased)
 			{
 				kp = false;
-				s1.move();
 			} // end of key stuff borught in
 		}
 
