@@ -159,6 +159,7 @@
   <ItemGroup>
     <ClInclude Include="Asteroid.h" />
     <ClInclude Include="GameWrapper.h" />
+    <ClInclude Include="Laser.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="ListNode.h" />
     <ClInclude Include="Ship.h" />
