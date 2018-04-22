@@ -10,6 +10,7 @@ Ship::Ship()
 	// Sets the sprite texture
 	mText = new sf::Texture();
 	mText->loadFromFile("ship-base-texture.png");
+
 	mBody.setTexture(*mText);
 	mBody.setRotation(1);
 
@@ -59,14 +60,28 @@ void Ship::rotateCW()
 {
 	//double vLen = ((mSlope.x) ^ 2 + (mSlope.y) ^ 2) ^ (1 / 2);
 	//double vLen = 
+	sf::Vector2f pUpdate = mBody.getPosition();
+	pUpdate.x += cos(mBody.getRotation() * (M_PI / 180));
+	pUpdate.y += sin(mBody.getRotation() * (M_PI / 180));
+
 	mBody.rotate(1);
 	updateSlope();
+
+	mBody.setPosition(pUpdate);
 }
 
 void Ship::rotateCounterCW()
 {
+	sf::Vector2f pUpdate = mBody.getPosition();
+//	pUpdate.x += (mBody.getTexture()->getSize().x / 2) * cos(mBody.getRotation() * (M_PI / 180));
+//	pUpdate.y += (mBody.getTexture()->getSize().y / 2) * sin(mBody.getRotation() * (M_PI / 180));
+	pUpdate.x += cos(mBody.getRotation() * (M_PI / 180));
+	pUpdate.y += sin(mBody.getRotation() * (M_PI / 180));
+
 	mBody.rotate(-1);
 	updateSlope();
+
+	mBody.setPosition(pUpdate);
 }
 
 void Ship::move()
