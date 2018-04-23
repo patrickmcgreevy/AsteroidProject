@@ -22,6 +22,8 @@ public:
 	
 	double checkDist(sf::Vector2f & v1, sf::Vector2f & v2);
 
+
+
 	bool checkCollision(Laser * laser, Asteroid * asteroid); // checks for laser vs asteroid collision; maybe kinda works
 	bool checkCollision(Ship * ship, Asteroid * asteroid); // checks for ship vs asteroid collision; maybe kinda works
 

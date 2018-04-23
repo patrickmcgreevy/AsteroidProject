@@ -10,6 +10,8 @@ public:
 	~Laser();
 	sf::Sprite & getBody();
 
+	bool checkRange();
+
 	void move(); // shit works
 private:
 	sf::Sprite mBody;

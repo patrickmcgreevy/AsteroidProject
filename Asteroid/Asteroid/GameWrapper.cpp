@@ -1,6 +1,9 @@
 #pragma once
 #include "GameWrapper.h"
 
+#define WINDOW_X 500
+#define WINDOW_Y 500
+
 GameWrapper::GameWrapper()
 {
 	//loads the textures for the member sprites
@@ -29,16 +32,20 @@ GameWrapper::~GameWrapper()
 
 void GameWrapper::runGame()
 {
-	sf::RenderWindow window(sf::VideoMode(500, 500), "Asteroid Game");
+	sf::RenderWindow window(sf::VideoMode(WINDOW_X, WINDOW_Y), "Asteroid Game");
 	Ship s1;
 	Laser* laserTemp = nullptr;
-	int nCycles = 0, lastShot = 0;
+	int nCycles = 0, lastShot = 0, level = 0;
 
 	bool kp = false, wPressed = false, aPressed = false, dPressed = false, spPressed = false; // key pressed bool
 
 	while (window.isOpen())
 	{
 		sf::Event event;
+		if (mAstList.getHead() == nullptr)
+		{
+			refreshLevel(level, mpAstText);
+		}
 		while (window.pollEvent(event))
 		{
 			if (event.type == sf::Event::Closed)
@@ -156,16 +163,27 @@ void GameWrapper::runGame()
 		drawLaserList(window);
 		moveLaserList();
 
-		/*for (int i = 0; i < forwardMotion; i++)
-		s1.move();
-		for (int i = 0; i < cwRotate; i++)
-		s1.rotateCW()*/
+		drawAsteroidList(window);
+		moveAsteroidList();
 
-		
 		window.draw(s1.getBody());
 
-		//s1.rotateCW();
-		//s1.move();
+		// Check laser bounds
+		node<Laser *> * pCurLaser = mLaserList.getHead(), * pPrevLaser, * pNextLaser;
+		while (pCurLaser != nullptr)
+		{
+			pNextLaser = pCurLaser->getNext();
+			if (pCurLaser->getData()->checkRange()) // Allowed range exceeded
+			{
+				pPrevLaser = pCurLaser->getPrev();
+				pCurLaser->getNext()->setPrev(pPrevLaser);
+				pPrevLaser->setNext(pCurLaser->getNext());
+				delete pCurLaser;
+				pCurLaser = pPrevLaser->getNext();
+			}
+			pCurLaser = pNextLaser;
+		}
+
 		window.display();
 		++nCycles;
 	}
@@ -180,26 +198,32 @@ void GameWrapper::refreshLevel(int n, sf::Texture * pText)
 	{
 		pCur = new Asteroid(pText);
 
-		if (i % 4 == 0)
+		if (i % 4 == 0) // Upper left / 4th quadrant
 		{
 			v.x = 1;
 			v.y = 1;
 		}
-		else if (i % 4 == 1)
+		else if (i % 4 == 1) // Upper right / 1st quadrant
 		{
 			v.x = 499;
 			v.y = 1;
+			pCur->getSlope().x = pCur->getSlope().x * -1;
 		}
-		else if (i % 4 == 2)
+		else if (i % 4 == 2) // Bottom left / 3rd quadrant
 		{
 			v.x = 1;
 			v.y = 499;
+			pCur->getSlope().y = pCur->getSlope().y * -1;
 		}
-		else
+		else // Bottom right / 2nd quadrant
 		{
 			v.x = 499;
 			v.y = 499;
+			pCur->getSlope().x = pCur->getSlope().x * -1;
+			pCur->getSlope().y = pCur->getSlope().y * -1;
 		}
+		/*v.x = 250;
+		v.y = 250;*/
 
 		pCur->getBody().setPosition(v);
 		mAstList.insertAtFront(pCur);

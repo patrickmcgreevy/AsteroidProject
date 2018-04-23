@@ -22,6 +22,11 @@ Laser::~Laser()
 	std::cout << "Inside Laser destructor." << std::endl;
 }
 
+bool Laser::checkRange()
+{
+	return mRangeExceded;
+}
+
 sf::Sprite & Laser::getBody()
 {
 	return mBody;
