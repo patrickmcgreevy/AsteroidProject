@@ -3,11 +3,12 @@
 
 GameWrapper::GameWrapper()
 {
+	//loads the textures for the member sprites
 	mpAstText = new sf::Texture();
 	mpAstText->loadFromFile("asteroid-texture.png");
 
 	mpLaserText = new sf::Texture();
-	mpLaserText->loadFromFile("laster-texture.png");
+	mpLaserText->loadFromFile("laser-texture.png");
 
 	mpBorderText = new sf::Texture();
 	mpBorderText->loadFromFile("border-texture.png");
@@ -15,6 +16,7 @@ GameWrapper::GameWrapper()
 
 GameWrapper::~GameWrapper()
 {
+	//deletes the textures
 	delete mpAstText;
 	delete mpLaserText;
 	delete mpBorderText;
@@ -24,6 +26,8 @@ void GameWrapper::runGame()
 {
 	sf::RenderWindow window(sf::VideoMode(500, 500), "Asteroid Game");
 	Ship s1;
+	Laser* laserTemp = nullptr;
+
 	bool kp = false, wPressed = false, aPressed = false, dPressed = false; // key pressed bool
 
 	while (window.isOpen())
@@ -41,12 +45,9 @@ void GameWrapper::runGame()
 				kp = true;
 				if (event.key.code == sf::Keyboard::Space)
 				{
-					l2 = new Laser(mpLaserText, s1.getSlope(), s1.getTip());
-					l2->getBody().setRotation(s1.getBody().getRotation());
-				}
-				if (event.key.code == sf::Keyboard::X)
-				{
-					l2->move();
+					laserTemp = new Laser(mpLaserText, s1.getSlope(), s1.getTip());
+					laserTemp->getBody().setRotation(s1.getBody().getRotation());
+					mLaserList.insertAtFront(laserTemp);
 				}
 				if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 				{
@@ -108,10 +109,7 @@ void GameWrapper::runGame()
 		}
 
 		window.clear();
-		if (l2 != nullptr) {
-			l2->move();
-			window.draw(l2->getBody());
-		}
+
 		if (wPressed)
 		{
 			s1.move();
@@ -126,23 +124,21 @@ void GameWrapper::runGame()
 		}
 
 
+		drawLaserList(window);
+		moveLaserList();
+
 		/*for (int i = 0; i < forwardMotion; i++)
 		s1.move();
 		for (int i = 0; i < cwRotate; i++)
-		s1.rotateCW()*/;
-		l1.move();
+		s1.rotateCW()*/
 
-		window.draw(l1.getBody());
-
-		window.draw(a1.getBody());
+		
 		window.draw(s1.getBody());
 
-		a1.getBody().move(a1.getSlope());
 		//s1.rotateCW();
 		//s1.move();
 		window.display();
-		forwardMotion = 0;
-		cwRotate = 0;
+	
 	}
 }
 
@@ -180,12 +176,45 @@ void GameWrapper::refreshLevel(int n, sf::Texture * pText)
 	}
 }
 
+// traverses the list and draws each asteroid
 void GameWrapper::drawAsteroidList(sf::RenderWindow & w)
 {
 	node<Asteroid *> *pCur = mAstList.getHead();
 	while (pCur != nullptr)
-	{
+	{ // draw each asteroid as you move through the list
 		w.draw(pCur->getData()->getBody());
+		pCur = pCur->getNext();
+	}
+}
+
+// traverses the list and draws each bullet 
+void GameWrapper::drawLaserList(sf::RenderWindow & w) {
+	node<Laser *> *pCur = mLaserList.getHead();
+	while (pCur != nullptr)
+	{ // draw each bullet as you move through
+		w.draw(pCur->getData()->getBody());
+		pCur = pCur->getNext();
+	}
+}
+
+// traveses the list and moves each laser
+void GameWrapper::moveLaserList() {
+	node<Laser *> *pCur = mLaserList.getHead();
+	while (pCur != nullptr)
+	{ // move each bullet 3 times for a faster speed
+		pCur->getData()->move();
+		pCur->getData()->move();
+		pCur->getData()->move();
+		pCur = pCur->getNext();
+	}
+}
+
+//traverses the list and moves each asteroid
+void GameWrapper::moveAsteroidList() { // dosent work yet
+	node<Asteroid *> *pCur = mAstList.getHead();
+	while (pCur != nullptr)
+	{
+		//pCur->getData()->move();
 		pCur = pCur->getNext();
 	}
 }

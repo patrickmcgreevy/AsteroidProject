@@ -1,13 +1,15 @@
 #pragma once
 #include "Asteroid.h"
 #include "Ship.h"
-#include "Laser.h"
-#include "List.h"
-#include <SFML/Graphics.hpp>
+#include "GameWrapper.h"
 //#include <iostream>
 
 int main()
 {
+
+	GameWrapper gm;
+	gm.runGame();
+	/*
 	sf::Texture * pLaserTexture = new sf::Texture();
 	sf::Texture * pAsteroidTexture = new sf::Texture();
 	pAsteroidTexture->loadFromFile("asteroid-texture.png");
@@ -154,7 +156,9 @@ int main()
 	}
 	
 	delete pAsteroidTexture;
-	delete pLaserTexture;
+	delete pLaserTexture; */
+		
+
 
 	return 0;
 }
