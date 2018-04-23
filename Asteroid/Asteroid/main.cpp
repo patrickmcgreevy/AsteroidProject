@@ -15,7 +15,7 @@ int main()
 	Asteroid a1(pAsteroidTexture);
 	Ship s1;
 	List<Asteroid> astList;
-	
+	List<Laser> laserList;
 	astList.insertAtFront(a1);
 
 
@@ -24,8 +24,8 @@ int main()
 
 	sf::RenderWindow window(sf::VideoMode(500, 500), "Asteroid Test.");
 
-	Laser l1(pLaserTexture, s1.getSlope(), s1.getPos());
-	Laser* l2 = nullptr;
+	//Laser l1(pLaserTexture, s1.getSlope(), s1.getPos());
+	Laser* laserTemp = nullptr;
 	bool kp = false, wPressed = false, aPressed = false, dPressed = false; // key pressed bool
 	int forwardMotion = 0; // position updater
 	int cwRotate = 0;
@@ -46,12 +46,9 @@ int main()
 				kp = true;
 				if (event.key.code == sf::Keyboard::Space)
 				{
-					l2 = new Laser(pLaserTexture, s1.getSlope(), s1.getTip());
-					l2->getBody().setRotation(s1.getBody().getRotation());
-				}
-				if (event.key.code == sf::Keyboard::X)
-				{
-					l2->move();
+					laserTemp = new Laser(pLaserTexture, s1.getSlope(), s1.getTip());
+					laserTemp->getBody().setRotation(s1.getBody().getRotation());
+					laserList.insertAtFront(*laserTemp);
 				}
 				if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 				{
@@ -124,10 +121,6 @@ int main()
 		}
 
 		window.clear();
-		if (l2 != nullptr) {
-			l2->move();
-			window.draw(l2->getBody());
-		}
 		if (wPressed)
 		{
 			s1.move();
@@ -140,13 +133,14 @@ int main()
 		{
 			s1.rotateCounterCW();
 		}
-		/*for (int i = 0; i < forwardMotion; i++)
-			s1.move();
-		for (int i = 0; i < cwRotate; i++)
-			s1.rotateCW()*/;
-		l1.move();
+		node<Laser>* pCur = laserList.getHead();
+		while (pCur != nullptr) {
+			window.draw(pCur->getData().getBody());
+			pCur = pCur->getNext();
+		}
 
-		window.draw(l1.getBody());
+		
+
 		
 		window.draw(a1.getBody());
 		window.draw(s1.getBody());
