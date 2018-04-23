@@ -82,7 +82,33 @@ int main()
 			//}
 			if (event.type == sf::Event::KeyReleased)
 			{
-				if()
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+				{
+					forwardMotion += 2;
+					wPressed = true;
+				}
+				else
+				{
+					wPressed = false;
+				}
+
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+				{
+					dPressed = true;
+				}
+				else
+				{
+					dPressed = false;
+				}
+
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+				{
+					aPressed = true;
+				}
+				else
+				{
+					aPressed = false;
+				}
 				//kp = false;
 			} // end of key stuff borught in
 		}
