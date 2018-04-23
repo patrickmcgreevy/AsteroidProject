@@ -141,8 +141,6 @@ void GameWrapper::runGame()
 		//s1.rotateCW();
 		//s1.move();
 		window.display();
-		forwardMotion = 0;
-		cwRotate = 0;
 	}
 }
 
@@ -189,3 +187,9 @@ void GameWrapper::drawAsteroidList(sf::RenderWindow & w)
 		pCur = pCur->getNext();
 	}
 }
+
+bool checkCollision(Laser * laser, Asteroid * asteroid)
+{
+
+}
+bool checkCollision(Ship * ship, Asteroid * asteroid);
