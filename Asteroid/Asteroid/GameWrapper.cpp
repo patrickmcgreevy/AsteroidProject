@@ -23,6 +23,127 @@ GameWrapper::~GameWrapper()
 void GameWrapper::runGame()
 {
 	sf::RenderWindow window(sf::VideoMode(500, 500), "Asteroid Game");
+	Ship s1;
+	bool kp = false, wPressed = false, aPressed = false, dPressed = false; // key pressed bool
+
+	while (window.isOpen())
+	{
+		sf::Event event;
+		while (window.pollEvent(event))
+		{
+			if (event.type == sf::Event::Closed)
+			{
+				window.close();
+			}
+
+			else if (event.type == sf::Event::KeyPressed) // key pressed loop from aofallon
+			{
+				kp = true;
+				if (event.key.code == sf::Keyboard::Space)
+				{
+					l2 = new Laser(mpLaserText, s1.getSlope(), s1.getTip());
+					l2->getBody().setRotation(s1.getBody().getRotation());
+				}
+				if (event.key.code == sf::Keyboard::X)
+				{
+					l2->move();
+				}
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+				{
+					wPressed = true;
+				}
+				else
+				{
+					wPressed = false;
+				}
+
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+				{
+					dPressed = true;
+				}
+				else
+				{
+					dPressed = false;
+				}
+
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+				{
+					aPressed = true;
+				}
+				else
+				{
+					aPressed = false;
+				}
+			}
+
+			if (event.type == sf::Event::KeyReleased)
+			{
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+				{
+					wPressed = true;
+				}
+				else
+				{
+					wPressed = false;
+				}
+
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+				{
+					dPressed = true;
+				}
+				else
+				{
+					dPressed = false;
+				}
+
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+				{
+					aPressed = true;
+				}
+				else
+				{
+					aPressed = false;
+				}
+			} // end of key stuff borught in
+		}
+
+		window.clear();
+		if (l2 != nullptr) {
+			l2->move();
+			window.draw(l2->getBody());
+		}
+		if (wPressed)
+		{
+			s1.move();
+		}
+		if (dPressed)
+		{
+			s1.rotateCW();
+		}
+		if (aPressed)
+		{
+			s1.rotateCounterCW();
+		}
+
+
+		/*for (int i = 0; i < forwardMotion; i++)
+		s1.move();
+		for (int i = 0; i < cwRotate; i++)
+		s1.rotateCW()*/;
+		l1.move();
+
+		window.draw(l1.getBody());
+
+		window.draw(a1.getBody());
+		window.draw(s1.getBody());
+
+		a1.getBody().move(a1.getSlope());
+		//s1.rotateCW();
+		//s1.move();
+		window.display();
+		forwardMotion = 0;
+		cwRotate = 0;
+	}
 }
 
 void GameWrapper::refreshLevel(int n, sf::Texture * pText)
