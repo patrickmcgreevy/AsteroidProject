@@ -60,14 +60,15 @@ void Ship::rotateCW()
 {
 	//double vLen = ((mSlope.x) ^ 2 + (mSlope.y) ^ 2) ^ (1 / 2);
 	//double vLen = 
-	sf::Vector2f pUpdate = mBody.getPosition();
-	pUpdate.x += cos(mBody.getRotation() * (M_PI / 180));
-	pUpdate.y += sin(mBody.getRotation() * (M_PI / 180));
+	mBody.rotate(.1);
 
-	mBody.rotate(1);
+	sf::Vector2f pUpdate = mBody.getPosition();
+	/*pUpdate.x += cos(mBody.getRotation() * (M_PI / 180));
+	pUpdate.y += sin(mBody.getRotation() * (M_PI / 180));*/
+
 	updateSlope();
 
-	mBody.setPosition(pUpdate);
+	//mBody.setPosition(pUpdate);
 }
 
 void Ship::rotateCounterCW()
@@ -75,13 +76,14 @@ void Ship::rotateCounterCW()
 	sf::Vector2f pUpdate = mBody.getPosition();
 //	pUpdate.x += (mBody.getTexture()->getSize().x / 2) * cos(mBody.getRotation() * (M_PI / 180));
 //	pUpdate.y += (mBody.getTexture()->getSize().y / 2) * sin(mBody.getRotation() * (M_PI / 180));
-	pUpdate.x += cos(mBody.getRotation() * (M_PI / 180));
-	pUpdate.y += sin(mBody.getRotation() * (M_PI / 180));
+	mBody.rotate(-.1);
 
-	mBody.rotate(-1);
+	/*pUpdate.x -= cos(mBody.getRotation() * (M_PI / 180));
+	pUpdate.y -= sin(mBody.getRotation() * (M_PI / 180));*/
+
 	updateSlope();
 
-	mBody.setPosition(pUpdate);
+//	mBody.setPosition(pUpdate);
 }
 
 void Ship::move()
