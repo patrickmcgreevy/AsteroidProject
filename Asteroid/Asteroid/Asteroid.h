@@ -1,3 +1,6 @@
+// Asteroid class contains information for display and motioin
+// does not move itself
+
 #pragma once
 #define _USE_MATH_DEFINES
 #include <SFML/Graphics.hpp>

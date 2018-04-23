@@ -52,14 +52,14 @@ sf::Vector2f & Asteroid::getSlope()
 
 void Asteroid::updateSlope(double theta)
 {
-	theta = theta * (M_PI / 180);
+	theta = theta * (M_PI / 180); // gets theta in radians
 	mSlope.y = cos(theta);
 	mSlope.x = sin(theta);
 }
 
 void Asteroid::updateSlope()
 {
-	double theta = mBody.getRotation() * (M_PI / 180);
+	double theta = mBody.getRotation() * (M_PI / 180); // gets theta in radians
 	mSlope.y = cos(theta);
 	mSlope.x = sin(theta);
 }
