@@ -5,6 +5,7 @@
 
 Laser::Laser(sf::Texture * pText, sf::Vector2f slope, sf::Vector2f initialPos)
 {
+	std::cout << "Inside Laser constructor." << std::endl;
 	mRangeExceded = false;
 
 	mpText = pText;
@@ -14,6 +15,11 @@ Laser::Laser(sf::Texture * pText, sf::Vector2f slope, sf::Vector2f initialPos)
 
 	mInitialPos = initialPos;
 	mBody.setPosition(mInitialPos);
+}
+
+Laser::~Laser()
+{
+	std::cout << "Inside Laser destructor." << std::endl;
 }
 
 sf::Sprite & Laser::getBody()

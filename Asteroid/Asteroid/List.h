@@ -47,8 +47,8 @@ void List<T>::destrucorHelper()
 
 		if (mpHead->getNext() != nullptr)
 		{
-			mpHead->getNext()->setPrev(nullptr);
-			mpHead = mpHead->getNext();
+			pCur->getNext()->setPrev(nullptr);
+			mpHead = pCur->getNext();
 		}
 		else
 		{

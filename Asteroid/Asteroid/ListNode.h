@@ -38,13 +38,7 @@ node<t>::node(t & newData)
 template <class t>
 node<t>::~node() {
 	std::cout << "Inside node destructor." << std::endl;
-	if (mpPrev != nullptr) {
-		mpPrev->setNext(mpNext);
-	}
-
-	if (mpNext != nullptr) {
-		mpNext->setNext(mpPrev);
-	}
+	delete data;
 }
 
 template <class t>

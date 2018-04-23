@@ -40,6 +40,12 @@ Asteroid::Asteroid(sf::Texture * texture, sf::Vector2f & size) // Pass in pointe
 	mBody.setScale(size.x / SCALE_DIVISOR, size.y / SCALE_DIVISOR); // Halves the size of the new asteroid
 }
 
+Asteroid::~Asteroid()
+{
+	//delete mText;
+	std::cout << "Inside asteroid destructor." << std::endl;
+}
+
 sf::Sprite & Asteroid::getBody()
 {
 	return mBody;
@@ -64,7 +70,8 @@ void Asteroid::updateSlope()
 	mSlope.x = sin(theta);
 }
 
-Asteroid::~Asteroid()
+void Asteroid::move()
 {
-	//delete mText;
+	mBody.move(mSlope);
 }
+

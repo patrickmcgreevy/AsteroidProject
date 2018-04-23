@@ -1,12 +1,13 @@
 #pragma once
 #include <SFML\Graphics.hpp>
 #include <cmath>
+#include <iostream>
 
 class Laser
 {
 public:
 	Laser(sf::Texture * pText, sf::Vector2f slope, sf::Vector2f initialPos);
-
+	~Laser();
 	sf::Sprite & getBody();
 
 	void move(); // shit works

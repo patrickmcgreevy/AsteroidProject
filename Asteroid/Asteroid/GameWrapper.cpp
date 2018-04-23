@@ -20,6 +20,11 @@ GameWrapper::~GameWrapper()
 	delete mpAstText;
 	delete mpLaserText;
 	delete mpBorderText;
+
+	std::cout << "Asteroid List" << std::endl;
+	mAstList.~List();
+	std::cout << "Laser list" << std::endl;
+	mLaserList.~List();
 }
 
 void GameWrapper::runGame()
@@ -27,8 +32,9 @@ void GameWrapper::runGame()
 	sf::RenderWindow window(sf::VideoMode(500, 500), "Asteroid Game");
 	Ship s1;
 	Laser* laserTemp = nullptr;
+	int nCycles = 0, lastShot = 0;
 
-	bool kp = false, wPressed = false, aPressed = false, dPressed = false; // key pressed bool
+	bool kp = false, wPressed = false, aPressed = false, dPressed = false, spPressed = false; // key pressed bool
 
 	while (window.isOpen())
 	{
@@ -43,11 +49,18 @@ void GameWrapper::runGame()
 			else if (event.type == sf::Event::KeyPressed) // key pressed loop from aofallon
 			{
 				kp = true;
-				if (event.key.code == sf::Keyboard::Space)
+				//if (event.key.code == sf::Keyboard::Space)
+				if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 				{
-					laserTemp = new Laser(mpLaserText, s1.getSlope(), s1.getTip());
+					spPressed = true;
+					/*laserTemp = new Laser(mpLaserText, s1.getSlope(), s1.getTip());
 					laserTemp->getBody().setRotation(s1.getBody().getRotation());
-					mLaserList.insertAtFront(laserTemp);
+					mLaserList.insertAtFront(laserTemp);*/
+				}
+				else
+				{
+					lastShot = nCycles;
+					spPressed = false;
 				}
 				if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 				{
@@ -79,6 +92,15 @@ void GameWrapper::runGame()
 
 			if (event.type == sf::Event::KeyReleased)
 			{
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+				{
+					spPressed = true;
+				}
+				else
+				{
+					lastShot = nCycles;
+					spPressed = false;
+				}
 				if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 				{
 					wPressed = true;
@@ -122,6 +144,13 @@ void GameWrapper::runGame()
 		{
 			s1.rotateCounterCW();
 		}
+		if (spPressed && ((nCycles - lastShot) % 100 == 0))
+		{
+			lastShot = nCycles;
+			laserTemp = new Laser(mpLaserText, s1.getSlope(), s1.getTip());
+			laserTemp->getBody().setRotation(s1.getBody().getRotation());
+			mLaserList.insertAtFront(laserTemp);
+		}
 
 
 		drawLaserList(window);
@@ -138,7 +167,9 @@ void GameWrapper::runGame()
 		//s1.rotateCW();
 		//s1.move();
 		window.display();
+		++nCycles;
 	}
+	std::cout << "App ended." << std::endl;
 }
 
 void GameWrapper::refreshLevel(int n, sf::Texture * pText)
@@ -201,25 +232,54 @@ void GameWrapper::moveLaserList() {
 	node<Laser *> *pCur = mLaserList.getHead();
 	while (pCur != nullptr)
 	{ // move each bullet 3 times for a faster speed
-		pCur->getData()->move();
-		pCur->getData()->move();
-		pCur->getData()->move();
+		for (int i = 0; i < 3; ++i)
+		{
+			pCur->getData()->move();
+		}
 		pCur = pCur->getNext();
 	}
 }
 
 //traverses the list and moves each asteroid
-void GameWrapper::moveAsteroidList() { // dosent work yet
+void GameWrapper::moveAsteroidList() {
 	node<Asteroid *> *pCur = mAstList.getHead();
 	while (pCur != nullptr)
 	{
-		//pCur->getData()->move();
+		pCur->getData()->move();
 		pCur = pCur->getNext();
 	}
 }
 
-bool checkCollision(Laser * laser, Asteroid * asteroid)
+double GameWrapper::checkDist(sf::Vector2f & v1, sf::Vector2f & v2)
 {
-
+	return pow(pow(v2.x - v1.x, 2) + pow(v2.y - v1.y, 2), (1 / 2));
 }
-bool checkCollision(Ship * ship, Asteroid * asteroid);
+
+bool GameWrapper::checkCollision(Laser * laser, Asteroid * asteroid) // maybe kinda works?
+{
+	double dist = 0;
+	sf::Vector2f vA, vB;
+	vA = laser->getBody().getPosition();
+	vB = asteroid->getBody().getPosition();
+
+	vA.x += 4;
+	vA.y += 10;
+
+	vB.x += 73;
+	vB.y += 80;
+
+	dist = checkDist(vA, vB);
+	if (dist > 74)
+	{
+		return false;
+	}
+	else
+	{
+		return true;
+	}
+}
+
+bool GameWrapper::checkCollision(Ship * ship, Asteroid * asteroid)
+{
+	return false;
+}
