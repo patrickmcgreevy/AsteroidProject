@@ -137,6 +137,8 @@ int main()
 		{
 			s1.rotateCounterCW();
 		}
+
+
 		/*for (int i = 0; i < forwardMotion; i++)
 			s1.move();
 		for (int i = 0; i < cwRotate; i++)
