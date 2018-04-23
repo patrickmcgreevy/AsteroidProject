@@ -104,3 +104,11 @@ void Ship::swapTexture()
 		mBody.setTexture(*mText);
 	}
 }
+
+// return a vector with the position of the tip
+sf::Vector2f Ship::getTip() {
+	float newx = this->getPos().x + 18*cos(mBody.getRotation() * (M_PI / 180));
+	float newy = this->getPos().y + 18 * sin(mBody.getRotation() * (M_PI / 180));
+	sf::Vector2f tip(newx, newy);
+	return tip;
+}

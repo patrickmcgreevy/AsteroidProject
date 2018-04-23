@@ -17,6 +17,7 @@ public:
 
 	sf::Vector2f & getSlope();
 	const sf::Vector2f & getPos();
+	sf::Vector2f getTip();
 
 	void move();
 
