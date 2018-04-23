@@ -124,7 +124,10 @@ int main()
 		}
 
 		window.clear();
-
+		if (l2 != nullptr) {
+			l2->move();
+			window.draw(l2->getBody());
+		}
 		if (wPressed)
 		{
 			s1.move();
