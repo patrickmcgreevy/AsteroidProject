@@ -160,13 +160,7 @@ void GameWrapper::runGame()
 		}
 
 
-		drawLaserList(window);
-		moveLaserList();
 
-		drawAsteroidList(window);
-		moveAsteroidList();
-
-		window.draw(s1.getBody());
 
 		// Check laser bounds
 		node<Laser *> * pCurLaser = mLaserList.getHead(), * pPrevLaser, * pNextLaser;
@@ -175,14 +169,30 @@ void GameWrapper::runGame()
 			pNextLaser = pCurLaser->getNext();
 			if (pCurLaser->getData()->checkRange()) // Allowed range exceeded
 			{
-				pPrevLaser = pCurLaser->getPrev();
-				pCurLaser->getNext()->setPrev(pPrevLaser);
-				pPrevLaser->setNext(pCurLaser->getNext());
-				delete pCurLaser;
-				pCurLaser = pPrevLaser->getNext();
+				mLaserList.deleteNode(pCurLaser);
+				/*pPrevLaser = pCurLaser->getPrev();
+				if (pNextLaser != nullptr)
+				{
+					pNextLaser->setPrev(pPrevLaser);
+				}
+
+				if (pPrevLaser != nullptr)
+				{
+					pPrevLaser->setNext(pNextLaser);
+				}
+				delete pCurLaser;*/
+				//pCurLaser = pPrevLaser->getNext();
 			}
 			pCurLaser = pNextLaser;
 		}
+
+		drawLaserList(window);
+		moveLaserList();
+
+		drawAsteroidList(window);
+		moveAsteroidList();
+
+		window.draw(s1.getBody());
 
 		window.display();
 		++nCycles;
@@ -246,7 +256,7 @@ void GameWrapper::drawLaserList(sf::RenderWindow & w) {
 	node<Laser *> *pCur = mLaserList.getHead();
 	while (pCur != nullptr)
 	{ // draw each bullet as you move through
-		w.draw(pCur->getData()->getBody());
+ 		w.draw(pCur->getData()->getBody());
 		pCur = pCur->getNext();
 	}
 }

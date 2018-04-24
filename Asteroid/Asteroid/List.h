@@ -14,6 +14,8 @@ public:
 
 	bool isEmpty();
 
+	void deleteNode(node<T> * pCon);
+
 private:
 	void destrucorHelper();
 
@@ -95,5 +97,34 @@ void List<T>::insertAtFront(T & newData)
 		}
 
 		mpHead = pNew;
+	}
+}
+
+template <class T>
+void List<T>::deleteNode(node<T> * pCon)
+{
+	node<T> * pCur = mpHead;
+	while (pCur != nullptr && pCur != pCon)
+	{
+		pCur = pCur->getNext();
+	}
+	if (pCur != nullptr)
+	{
+		if (pCur->getPrev() != nullptr)
+		{
+			pCur->getPrev()->setNext(pCur->getNext());
+		}
+
+		if (pCur->getNext() != nullptr)
+		{
+			pCur->getNext()->setPrev(pCur->getPrev());
+		}
+
+		if (pCur == mpHead)
+		{
+			mpHead = pCur->getNext();
+		}
+
+		delete pCur;
 	}
 }

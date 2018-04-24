@@ -46,8 +46,12 @@ void Laser::move()
 	/*curX = mBody.getPosition().x;
 	curY = mBody.getPosition().y;
 	curHyp = pow(curX*curX + curY*curY, 1 / 2);*/
-	if (dHyp >= SCREEN_MAX_LEN)
+	/*if (dHyp >= SCREEN_MAX_LEN)
 	{
 		mRangeExceded = true;
+	}*/
+	if (dX > 640 || dX < -640 || dY > 640 || dY < -640)
+	{
+ 		mRangeExceded = true;
 	}
 }
