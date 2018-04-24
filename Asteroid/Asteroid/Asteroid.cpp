@@ -43,7 +43,7 @@ Asteroid::Asteroid(sf::Texture * texture, sf::Vector2f & size) // Pass in pointe
 Asteroid::~Asteroid()
 {
 	//delete mText;
-	std::cout << "Inside asteroid destructor." << std::endl;
+	//std::cout << "Inside asteroid destructor." << std::endl;
 }
 
 sf::Sprite & Asteroid::getBody()
@@ -76,24 +76,23 @@ void Asteroid::move()
 	mBody.move(mSlope);
 }
 
-void Asteroid::boundCheck() {
-	double top = this->mBody.getPosition().y;
-	double bot = mBody.getPosition().y + 146;
-	double left = mBody.getPosition().x;
-	double right = mBody.getPosition().x + 160;
-
-	if (right < 0) {
-		mBody.setPosition(500, mBody.getPosition().y);
-	}
-	else if (left > 500) {
-		mBody.setPosition(-159, mBody.getPosition().y);
-	}
-
-	if (top > 500) {
-		mBody.setPosition(mBody.getPosition().x, -145);
-	}
-	else if (bot < 0) {
-		mBody.setPosition(mBody.getPosition().x, 500);
-	}
-}
-
+//void Asteroid::boundCheck() {
+//	double top = this->mBody.getPosition().y;
+//	double bot = mBody.getPosition().y + 146;
+//	double left = mBody.getPosition().x;
+//	double right = mBody.getPosition().x + 160;
+//
+//	if (right < 0) {
+//		mBody.setPosition(500, mBody.getPosition().y);
+//	}
+//	else if (left > 500) {
+//		mBody.setPosition(-159, mBody.getPosition().y);
+//	}
+//
+//	if (top > 500) {
+//		mBody.setPosition(mBody.getPosition().x, -145);
+//	}
+//	else if (bot < 0) {
+//		mBody.setPosition(mBody.getPosition().x, 500);
+//	}
+//}

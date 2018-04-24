@@ -151,6 +151,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Asteroid.cpp" />
+    <ClCompile Include="BoundedObject.cpp" />
     <ClCompile Include="GameWrapper.cpp" />
     <ClCompile Include="Laser.cpp" />
     <ClCompile Include="main.cpp" />
@@ -159,14 +160,17 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Asteroid.h" />
+    <ClInclude Include="BoundedObject.h" />
     <ClInclude Include="GameWrapper.h" />
     <ClInclude Include="Laser.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="ListNode.h" />
     <ClInclude Include="Ship.h" />
+    <ClInclude Include="SlopeObject.h" />
     <ClInclude Include="StackNodeTemplate.h" />
     <ClInclude Include="StackTemplate.h" />
     <ClInclude Include="Stats.h" />
+    <ClInclude Include="Universal.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="asteroid-texture.png" />

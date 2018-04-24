@@ -37,7 +37,7 @@ node<t>::node(t & newData)
 
 template <class t>
 node<t>::~node() {
-	std::cout << "Inside node destructor." << std::endl;
+	//std::cout << "Inside node destructor." << std::endl;
 	delete data;
 }
 

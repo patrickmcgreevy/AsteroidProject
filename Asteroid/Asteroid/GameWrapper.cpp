@@ -24,9 +24,9 @@ GameWrapper::~GameWrapper()
 	delete mpLaserText;
 	delete mpBorderText;
 
-	std::cout << "Asteroid List" << std::endl;
+	//std::cout << "Asteroid List" << std::endl;
 	mAstList.~List();
-	std::cout << "Laser list" << std::endl;
+	//std::cout << "Laser list" << std::endl;
 	mLaserList.~List();
 }
 
@@ -160,17 +160,16 @@ void GameWrapper::runGame()
 			laserTemp->getBody().setRotation(s1.getBody().getRotation());
 			mLaserList.insertAtFront(laserTemp);
 		}
+		// Checks the asteroids for wrap around
 		if (nCycles % 100 == 0) {
 			astListBoundCheck();
+			s1.boundCheck();
 		}
 
-
-
-
 		// Check laser bounds
-		if (nCycles % 1000 == 0)
+		if (nCycles % 10 == 0)
 		{
-			node<Laser *> * pCurLaser = mLaserList.getHead(), *pPrevLaser, *pNextLaser;
+			node<Laser *> * pCurLaser = mLaserList.getHead(), *pNextLaser;
 			while (pCurLaser != nullptr)
 			{
 				pNextLaser = pCurLaser->getNext();
@@ -194,6 +193,11 @@ void GameWrapper::runGame()
 		++nCycles;
 	}
 	std::cout << "App ended." << std::endl;
+}
+
+void GameWrapper::garbageCollector()
+{
+	//std::cout << "I am the garbage man!!!" << std::endl;
 }
 
 void GameWrapper::refreshLevel(int n, sf::Texture * pText)
@@ -243,6 +247,7 @@ void GameWrapper::drawAsteroidList(sf::RenderWindow & w)
 	while (pCur != nullptr)
 	{ // draw each asteroid as you move through the list
 		w.draw(pCur->getData()->getBody());
+		pCur->getData()->move();
 		pCur = pCur->getNext();
 	}
 }
@@ -253,6 +258,10 @@ void GameWrapper::drawLaserList(sf::RenderWindow & w) {
 	while (pCur != nullptr)
 	{ // draw each bullet as you move through
  		w.draw(pCur->getData()->getBody());
+		for (int i = 0; i < 3; ++i)
+		{
+			pCur->getData()->move();
+		}
 		pCur = pCur->getNext();
 	}
 }

@@ -5,7 +5,7 @@
 
 Laser::Laser(sf::Texture * pText, sf::Vector2f slope, sf::Vector2f initialPos)
 {
-	std::cout << "Inside Laser constructor." << std::endl;
+	//std::cout << "Inside Laser constructor." << std::endl;
 	mRangeExceded = false;
 
 	mpText = pText;
@@ -19,7 +19,7 @@ Laser::Laser(sf::Texture * pText, sf::Vector2f slope, sf::Vector2f initialPos)
 
 Laser::~Laser()
 {
-	std::cout << "Inside Laser destructor." << std::endl;
+	//std::cout << "Inside Laser destructor." << std::endl;
 }
 
 bool Laser::checkRange()

@@ -33,7 +33,7 @@ List<T>::List()
 template <class T>
 List<T>::~List()
 {
-	std::cout << "Inside List destructor." << std::endl;
+	//std::cout << "Inside List destructor." << std::endl;
 	while (mpHead != nullptr)
 	{
 		destrucorHelper();

@@ -2,12 +2,25 @@
 #include "Asteroid.h"
 #include "Ship.h"
 #include "GameWrapper.h"
+#include <thread>
 //#include <iostream>
+
+void garbageCollection(GameWrapper * game)
+{
+	//game->garbageCollector();
+	while (1)
+	{
+		std::cout << " bitches" << std::endl;
+	}
+}
 
 int main()
 {
-
 	GameWrapper gm;
+	void (*foo)(GameWrapper *);
+	foo = garbageCollection;
+
+	//std::thread garbageThread(foo, &gm);
 	gm.runGame();
 	/*
 	sf::Texture * pLaserTexture = new sf::Texture();
