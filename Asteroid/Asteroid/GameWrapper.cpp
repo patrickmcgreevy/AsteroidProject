@@ -166,27 +166,18 @@ void GameWrapper::runGame()
 
 
 		// Check laser bounds
-		node<Laser *> * pCurLaser = mLaserList.getHead(), * pPrevLaser, * pNextLaser;
-		while (pCurLaser != nullptr)
+		if (nCycles % 1000 == 0)
 		{
-			pNextLaser = pCurLaser->getNext();
-			if (pCurLaser->getData()->checkRange()) // Allowed range exceeded
+			node<Laser *> * pCurLaser = mLaserList.getHead(), *pPrevLaser, *pNextLaser;
+			while (pCurLaser != nullptr)
 			{
-				mLaserList.deleteNode(pCurLaser);
-				/*pPrevLaser = pCurLaser->getPrev();
-				if (pNextLaser != nullptr)
+				pNextLaser = pCurLaser->getNext();
+				if (pCurLaser->getData()->checkRange()) // Allowed range exceeded
 				{
-					pNextLaser->setPrev(pPrevLaser);
+					mLaserList.deleteNode(pCurLaser);
 				}
-
-				if (pPrevLaser != nullptr)
-				{
-					pPrevLaser->setNext(pNextLaser);
-				}
-				delete pCurLaser;*/
-				//pCurLaser = pPrevLaser->getNext();
+				pCurLaser = pNextLaser;
 			}
-			pCurLaser = pNextLaser;
 		}
 
 		drawLaserList(window);
