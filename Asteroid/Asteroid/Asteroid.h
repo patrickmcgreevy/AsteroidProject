@@ -22,6 +22,10 @@ public:
 	sf::Sprite & getBody();
 	sf::Vector2f & getSlope();
 
+	sf::Texture * getmText();
+	int getParts();
+	void setParts(int n);
+
 	void updateSlope(double theta); // For setting direction of the mini stroids
 	void updateSlope(); // Don't call
 	
@@ -31,5 +35,6 @@ public:
 private:
 	//sf::Sprite mBody;
 	sf::Texture *mText;
+	int nParts;
 	//sf::Vector2f mSlope;
 };

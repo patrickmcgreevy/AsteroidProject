@@ -200,6 +200,10 @@ void GameWrapper::runGame()
 			{
 				if (checkCollision(pCurL->getData(), pCurA->getData()))
 				{
+					if (checkSplit(pCurA->getData()))
+					{
+						splitAsteroid(pCurA->getData());
+					}
 					pTempA = pCurA->getNext();
 					mAstList.deleteNode(pCurA);
 					mLaserList.deleteNode(pCurL);
@@ -237,7 +241,7 @@ void GameWrapper::garbageCollector()
 	//std::cout << "I am the garbage man!!!" << std::endl;
 }
 
-void GameWrapper::refreshLevel(int n, sf::Texture * pText)
+void GameWrapper::refreshLevel(int & n, sf::Texture * pText)
 {
 	Asteroid * pCur;
 	sf::Vector2f v;
@@ -275,6 +279,7 @@ void GameWrapper::refreshLevel(int n, sf::Texture * pText)
 		pCur->getBody().setPosition(v);
 		mAstList.insertAtFront(pCur);
 	}
+	++n;
 }
 
 // traverses the list and draws each asteroid
@@ -342,11 +347,11 @@ bool GameWrapper::checkCollision(Laser * laser, Asteroid * asteroid) // works
 	vA.x += 4;
 	vA.y += 10;
 
-	vB.x += 73;
-	vB.y += 80;
+	vB.x += asteroid->getBody().getTextureRect().width / 2;
+	vB.y += asteroid->getBody().getTextureRect().height / 2;
 
 	dist = checkDist(vA, vB);
-	if (dist > 74)
+	if (dist > asteroid->getBody().getTextureRect().width / 2)
 	{
 		return false;
 	}
@@ -386,4 +391,30 @@ void GameWrapper::astListBoundCheck() {
 		pCur->getData()->boundCheck();
 		pCur = pCur->getNext();
 	}
+}
+
+bool GameWrapper::checkSplit(Asteroid * a)
+{
+	if (a->getParts() > 0)
+	{
+		return true;
+	}
+	return false;
+}
+
+void GameWrapper::splitAsteroid(Asteroid * ast)
+{
+	ast->setParts(ast->getParts() - 1);
+	for (int i = 0; i < 2; ++i)
+	{
+		Asteroid * pNew = new Asteroid(ast->getmText());
+		if (pNew != nullptr)
+		{
+			pNew->getBody().setScale(ast->getBody().getScale().x / 2, ast->getBody().getScale().y / 2);
+			pNew->setParts(ast->getParts());
+			pNew->getBody().setPosition(ast->getBody().getPosition());
+			mAstList.insertAtFront(pNew);
+		}
+	}
+	
 }

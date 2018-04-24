@@ -17,7 +17,7 @@ Asteroid::Asteroid()
 	// Sets the slope to a random vector w/ dX and dY less than 1
 	mSlope.x = (float)(rand() % 1000) / SLOPE_DIVISOR;
 	mSlope.y = (float)(rand() % 1000) / SLOPE_DIVISOR;
-	cout << "Slope: " << mSlope.x << ", " << mSlope.y << endl;
+	//cout << "Slope: " << mSlope.x << ", " << mSlope.y << endl;
 }
 
 Asteroid::Asteroid(sf::Texture * texture) // Pass in pointer to spawning asteroid's texture and the asteroid's sprite's vector
@@ -28,6 +28,7 @@ Asteroid::Asteroid(sf::Texture * texture) // Pass in pointer to spawning asteroi
 	// Sets the slope to a random vector w/ dX and dY less than 1
 	mSlope.x = (float)(rand() % 1000) / SLOPE_DIVISOR;
 	mSlope.y = (float)(rand() % 1000) / SLOPE_DIVISOR;
+	nParts = 2;
 	//cout << "Slope: " << mSlope.x << ", " << mSlope.y << endl;
 }
 
@@ -76,6 +77,20 @@ void Asteroid::move()
 	mBody.move(mSlope.x * (WINDOW_WIDTH / 250), mSlope.y * (WINDOW_WIDTH / 250));
 }
 
+int Asteroid::getParts()
+{
+	return nParts;
+}
+
+void Asteroid::setParts(int n)
+{
+	nParts = n;
+}
+
+sf::Texture * Asteroid::getmText()
+{
+	return mText;
+}
 //void Asteroid::boundCheck() {
 //	double top = this->mBody.getPosition().y;
 //	double bot = mBody.getPosition().y + 146;
