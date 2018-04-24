@@ -14,6 +14,8 @@ public:
 
 	bool isEmpty();
 
+	void deleteNode(node<T> * pCon);
+
 private:
 	void destrucorHelper();
 
@@ -95,5 +97,14 @@ void List<T>::insertAtFront(T & newData)
 		}
 
 		mpHead = pNew;
+	}
+}
+
+template <class T>
+void List<T>::deleteNode(node<T> * pCon)
+{
+	if (mpHead == pCon)
+	{
+
 	}
 }
