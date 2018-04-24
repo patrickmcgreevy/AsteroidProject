@@ -35,7 +35,6 @@ void GameWrapper::runGame()
 	sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Asteroid Game");
 	Ship s1;
 	Laser* laserTemp = nullptr;
-	Stats s;
 
 	int nCycles = 0, lastShot = 0, level = 0;
 
@@ -165,7 +164,7 @@ void GameWrapper::runGame()
 			laserTemp->getBody().setRotation(s1.getBody().getRotation());
 			mLaserList.insertAtFront(laserTemp);
 		}
-		// Checks the asteroids for wrap around
+		// Checks the asteroids and ship for wrap around
 		if (nCycles % 100 == 0) {
 			astListBoundCheck();
 			s1.boundCheck();
@@ -206,6 +205,7 @@ void GameWrapper::runGame()
 					mLaserList.deleteNode(pCurL);
 					pCurA = pTempA;
 					pCurL = nullptr;
+					mScore.setScore(mScore.getScore() + 1);
 				}
 				else
 				{
@@ -220,7 +220,7 @@ void GameWrapper::runGame()
 
 		drawLaserList(window);
 		moveLaserList();
-		window.draw(s.getText());
+		window.draw(mScore.getText());
 		drawAsteroidList(window);
 		moveAsteroidList();
 

@@ -1,4 +1,5 @@
 #pragma once
+#include <sstream>
 #include "Ship.h"
 
 using std::string;
@@ -12,12 +13,11 @@ public:
 	void setLives(int newLives);
 	void setScore(int newScore);
 	sf::Text& getText();
+	void updateText();
 private:
+	std::ostringstream sStream;
 	sf::Text mText;
 	sf::Font mFont;
-	string sText;
-	string mString1;
-	string mString2;
 	int mScore;
 	int mLives;
 };

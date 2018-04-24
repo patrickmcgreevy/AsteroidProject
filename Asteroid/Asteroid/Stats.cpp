@@ -6,17 +6,27 @@ Stats::Stats() {
 	mText.setFont(mFont);
 	mText.setCharacterSize(15);
 	mText.setFillColor(sf::Color::White);
-	mText.setString("Lives: 3\nScore: 0");
 	mText.setStyle(sf::Text::Bold);
 	mText.setPosition(10, 30);
+	mLives = 3;
+	mScore = 0;
+	updateText();
+	
 }
 
 Stats::~Stats() {
 
 }
 
+void Stats::updateText() {
+	sStream.str("");
+	sStream << "Lives : " << mLives << "\nScore : " << mScore;
+	mText.setString(sStream.str());
+}
+
 int Stats::getScore() {
 	return mScore;
+	updateText();
 }
 
 int Stats::getLives() {
@@ -31,8 +41,10 @@ sf::Text& Stats::getText() {
 
 void Stats::setScore(int newScore) {
 	mScore = newScore;
+	updateText();
 }
 
 void Stats::setLives(int newLives) {
 	mLives = newLives;
+	updateText();
 }

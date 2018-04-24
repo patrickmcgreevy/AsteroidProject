@@ -48,7 +48,7 @@ private:
 	sf::Texture * mpBorderText;
 	//sf::Texture * mpShipText;
 	sf::RenderWindow mWindow;
-	
+	Stats mScore;
 	List<Asteroid *> mAstList;
 	List<Laser *> mLaserList;
 	sf::Event mEvent;
