@@ -73,7 +73,7 @@ void Asteroid::updateSlope()
 void Asteroid::move()
 
 {
-	mBody.move(mSlope);
+	mBody.move(mSlope.x * (WINDOW_WIDTH / 250), mSlope.y * (WINDOW_WIDTH / 250));
 }
 
 //void Asteroid::boundCheck() {

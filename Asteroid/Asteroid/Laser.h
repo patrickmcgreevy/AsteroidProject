@@ -2,6 +2,7 @@
 #include <SFML\Graphics.hpp>
 #include <cmath>
 #include <iostream>
+#include "Universal.h"
 
 class Laser
 {

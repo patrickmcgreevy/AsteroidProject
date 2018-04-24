@@ -37,7 +37,7 @@ void Laser::move()
 {
 	double dX, dY, dHyp;
 
-	mBody.move(mSlope);
+	mBody.move(mSlope.x * (WINDOW_WIDTH / 250), mSlope.y * (WINDOW_HEIGHT / 250));
 
 	dX = mBody.getPosition().x - mInitialPos.x;
 	dY = mBody.getPosition().y - mInitialPos.y;
@@ -50,7 +50,7 @@ void Laser::move()
 	{
 		mRangeExceded = true;
 	}*/
-	if (dX > 640 || dX < -640 || dY > 640 || dY < -640)
+	if (dX > WINDOW_WIDTH || dX < -WINDOW_WIDTH || dY > WINDOW_HEIGHT || dY < -WINDOW_HEIGHT)
 	{
  		mRangeExceded = true;
 	}

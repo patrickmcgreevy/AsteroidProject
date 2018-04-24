@@ -32,15 +32,16 @@ GameWrapper::~GameWrapper()
 
 void GameWrapper::runGame()
 {
-	sf::RenderWindow window(sf::VideoMode(WINDOW_X, WINDOW_Y), "Asteroid Game");
+	sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Asteroid Game");
 	Ship s1;
 	Laser* laserTemp = nullptr;
-	int nCycles = 0, lastShot = 0, level = 0;
+	int nCycles = 0, lastShot = 0, level = 2;
 
 	bool kp = false, wPressed = false, aPressed = false, dPressed = false, spPressed = false; // key pressed bool
-
 	while (window.isOpen())
 	{
+		++nCycles;
+
 		sf::Event event;
 		if (mAstList.getHead() == nullptr)
 		{
@@ -59,14 +60,18 @@ void GameWrapper::runGame()
 				//if (event.key.code == sf::Keyboard::Space)
 				if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 				{
+					if (!spPressed)
+					{
+						lastShot = nCycles;
+					}
 					spPressed = true;
+
 					/*laserTemp = new Laser(mpLaserText, s1.getSlope(), s1.getTip());
 					laserTemp->getBody().setRotation(s1.getBody().getRotation());
 					mLaserList.insertAtFront(laserTemp);*/
 				}
 				else
 				{
-					lastShot = nCycles;
 					spPressed = false;
 				}
 				if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
@@ -105,7 +110,7 @@ void GameWrapper::runGame()
 				}
 				else
 				{
-					lastShot = nCycles;
+					//lastShot = nCycles;
 					spPressed = false;
 				}
 				if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
@@ -151,9 +156,9 @@ void GameWrapper::runGame()
 		{
 			s1.rotateCounterCW();
 		}
-		if (spPressed && ((nCycles - lastShot) % 100 == 0))
+		if (spPressed && ((nCycles - lastShot) % 100 == 0) || (nCycles - lastShot) == 0)
 		{
-			lastShot = nCycles; 
+			//lastShot = nCycles; 
 			laserTemp = new Laser(mpLaserText, s1.getSlope(), s1.getBody().getPosition());
 			laserTemp->getBody().setRotation(s1.getBody().getRotation());
 			mLaserList.insertAtFront(laserTemp);
@@ -179,6 +184,37 @@ void GameWrapper::runGame()
 			}
 		}
 
+		node<Asteroid *> *pCurA = mAstList.getHead(), *pTempA;
+		node<Laser *> *pCurL = mLaserList.getHead(), *pTempL;
+		while (pCurA != nullptr)
+		{
+			// check ship collision
+			if (checkCollision(s1, pCurA->getData()))
+			{
+				// Destroy the ship and decrement lives
+			}
+			pCurL = mLaserList.getHead();
+			while (pCurL != nullptr && pCurA != nullptr)
+			{
+				if (checkCollision(pCurL->getData(), pCurA->getData()))
+				{
+					pTempA = pCurA->getNext();
+					mAstList.deleteNode(pCurA);
+					mLaserList.deleteNode(pCurL);
+					pCurA = pTempA;
+					pCurL = nullptr;
+				}
+				else
+				{
+					pCurL = pCurL->getNext();
+				}
+			}
+			if (pCurA != nullptr)
+			{
+				pCurA = pCurA->getNext();
+			}
+		}
+
 		drawLaserList(window); // draws and moves the list
 		//moveLaserList();
 
@@ -188,7 +224,7 @@ void GameWrapper::runGame()
 		window.draw(s1.getBody());
 
 		window.display();
-		++nCycles;
+		//++nCycles;
 	}
 	std::cout << "App ended." << std::endl;
 }
@@ -213,20 +249,20 @@ void GameWrapper::refreshLevel(int n, sf::Texture * pText)
 		}
 		else if (i % 4 == 1) // Upper right / 1st quadrant
 		{
-			v.x = 499;
+			v.x = WINDOW_WIDTH;
 			v.y = 1;
 			pCur->getSlope().x = pCur->getSlope().x * -1;
 		}
 		else if (i % 4 == 2) // Bottom left / 3rd quadrant
 		{
 			v.x = 1;
-			v.y = 499;
+			v.y = WINDOW_HEIGHT;
 			pCur->getSlope().y = pCur->getSlope().y * -1;
 		}
 		else // Bottom right / 2nd quadrant
 		{
-			v.x = 499;
-			v.y = 499;
+			v.x = WINDOW_WIDTH;
+			v.y = WINDOW_HEIGHT;
 			pCur->getSlope().x = pCur->getSlope().x * -1;
 			pCur->getSlope().y = pCur->getSlope().y * -1;
 		}
@@ -289,10 +325,11 @@ void GameWrapper::moveAsteroidList() {
 
 double GameWrapper::checkDist(sf::Vector2f & v1, sf::Vector2f & v2)
 {
-	return pow(pow(v2.x - v1.x, 2) + pow(v2.y - v1.y, 2), (1 / 2));
+	double d = pow(pow(v2.x - v1.x, 2) + pow(v2.y - v1.y, 2), .5);
+	return d;
 }
 
-bool GameWrapper::checkCollision(Laser * laser, Asteroid * asteroid) // maybe kinda works?
+bool GameWrapper::checkCollision(Laser * laser, Asteroid * asteroid) // works
 {
 	double dist = 0;
 	sf::Vector2f vA, vB;
@@ -316,9 +353,28 @@ bool GameWrapper::checkCollision(Laser * laser, Asteroid * asteroid) // maybe ki
 	}
 }
 
-bool GameWrapper::checkCollision(Ship * ship, Asteroid * asteroid)
+bool GameWrapper::checkCollision(Ship & ship, Asteroid * asteroid)
 {
-	return false;
+	double dist = 0;
+	sf::Vector2f vA, vB;
+	vA = ship.getBody().getPosition();
+	vB = asteroid->getBody().getPosition();
+
+	vA.x += ship.getBody().getTexture()->getSize().x / 2;
+	vA.y += ship.getBody().getTexture()->getSize().y / 2;
+
+	vB.x += asteroid->getBody().getTexture()->getSize().x / 2;
+	vB.y += asteroid->getBody().getTexture()->getSize().y / 2;
+
+	dist = checkDist(vA, vB);
+	if (dist > asteroid->getBody().getTexture()->getSize().x)
+	{
+		return false;
+	}
+	else
+	{
+		return true;
+	}
 }
 
 void GameWrapper::astListBoundCheck() {

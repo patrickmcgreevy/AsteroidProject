@@ -9,6 +9,7 @@
 #include <cmath>
 #include <iostream>
 #include <random>
+#include "Universal.h"
 
 class Asteroid : public SlopeObject
 {

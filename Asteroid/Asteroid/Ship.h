@@ -3,6 +3,7 @@
 #include "SlopeObject.h"
 #include <SFML\Graphics.hpp>
 #include <cmath>
+#include "Universal.h"
 
 class Ship : public SlopeObject
 {

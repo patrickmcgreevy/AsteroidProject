@@ -1,5 +1,6 @@
 #pragma once
 #include "Ship.h"
+#include "Universal.h"
 
 // Make these equal to half the window size?
 #define X_AXIS_MID 250
@@ -16,7 +17,7 @@ Ship::Ship()
 	mBody.setRotation(1);
 
 	// Sets the position of the sprite and the scale and the direction of the vector
-	mBody.setPosition(X_AXIS_MID, Y_AXIS_MID);
+	mBody.setPosition(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
 	updateSlope();
 	mBody.setOrigin(19, 33.5);
 	//updateSlope(mBody.getRotation());
@@ -62,7 +63,7 @@ void Ship::rotateCW()
 {
 	//double vLen = ((mSlope.x) ^ 2 + (mSlope.y) ^ 2) ^ (1 / 2);
 	//double vLen = 
-	mBody.rotate(.1);
+	mBody.rotate(.25);
 	//sf::Vector2f newPos(mBody.getPosition().x + 21 * (1 - cos(mBody.getRotation() * (M_PI / 180))), mBody.getPosition().y + 21 * sin(mBody.getRotation() * (M_PI / 180)));
 	//sf::Vector2f pUpdate = mBody.getPosition();
 	/*pUpdate.x += cos(mBody.getRotation() * (M_PI / 180));
@@ -77,7 +78,7 @@ void Ship::rotateCounterCW()
 	sf::Vector2f pUpdate = mBody.getPosition();
 //	pUpdate.x += (mBody.getTexture()->getSize().x / 2) * cos(mBody.getRotation() * (M_PI / 180));
 //	pUpdate.y += (mBody.getTexture()->getSize().y / 2) * sin(mBody.getRotation() * (M_PI / 180));
-	mBody.rotate(-.1);
+	mBody.rotate(-.25);
 
 	/*pUpdate.x -= cos(mBody.getRotation() * (M_PI / 180));
 	pUpdate.y -= sin(mBody.getRotation() * (M_PI / 180));*/
@@ -91,7 +92,7 @@ void Ship::move()
 {
 	// Update texture to rocket firing mode
 	//swapTexture();
-	mBody.move(mSlope);
+	mBody.move(mSlope.x * (WINDOW_WIDTH / 250), mSlope.y * (WINDOW_HEIGHT / 250));
 }
 
 void Ship::swapTexture()
