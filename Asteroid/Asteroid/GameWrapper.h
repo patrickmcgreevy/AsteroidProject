@@ -9,6 +9,7 @@
 #include "List.h"
 #include "Universal.h"
 #include <cmath>
+#include "stats.h"
 
 class GameWrapper
 {
