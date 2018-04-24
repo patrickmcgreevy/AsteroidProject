@@ -3,9 +3,9 @@
 // detects interactions and initiates proper reactions
 
 #pragma once
-#include "Asteroid.h"
-#include "Laser.h"
 #include "Ship.h"
+#include "Laser.h"
+#include "Asteroid.h"
 #include "List.h"
 #include <cmath>
 

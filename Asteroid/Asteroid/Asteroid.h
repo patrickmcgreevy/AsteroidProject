@@ -3,13 +3,14 @@
 
 #pragma once
 #define _USE_MATH_DEFINES
-#include <SFML/Graphics.hpp>
-#include <SFML/Graphics/Sprite.hpp>
+#include "SlopeObject.h"
+//#include <SFML/Graphics.hpp>
+//#include <SFML/Graphics/Sprite.hpp>
 #include <cmath>
 #include <iostream>
 #include <random>
 
-class Asteroid 
+class Asteroid : public SlopeObject
 {
 public:
 	Asteroid(); // For tests. don't call. destructor doesnt work anymore
@@ -25,9 +26,9 @@ public:
 	
 
 	void move();
-	void boundCheck();
+	//void boundCheck(); //inherits one from BoundedObject class
 private:
-	sf::Sprite mBody;
+	//sf::Sprite mBody;
 	sf::Texture *mText;
-	sf::Vector2f mSlope;
+	//sf::Vector2f mSlope;
 };
