@@ -28,7 +28,7 @@ public:
 	bool checkCollision(Laser * laser, Asteroid * asteroid); // checks for laser vs asteroid collision; maybe kinda works
 	bool checkCollision(Ship & ship, Asteroid * asteroid); // checks for ship vs asteroid collision; maybe kinda works
 
-	void GameWrapper::refreshLevel(int n, sf::Texture * pText);
+	void GameWrapper::refreshLevel(int & n, sf::Texture * pText);
 
 	//
 	void drawAsteroidList(sf::RenderWindow & w);
