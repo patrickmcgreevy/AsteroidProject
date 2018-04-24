@@ -194,6 +194,7 @@ void GameWrapper::runGame()
 			if (checkCollision(s1, pCurA->getData()))
 			{
 				// Destroy the ship and decrement lives
+				// std::cout << "Ship-Asteroid collisioni." << std::endl;
 			}
 			pCurL = mLaserList.getHead();
 			while (pCurL != nullptr && pCurA != nullptr)
@@ -240,7 +241,7 @@ void GameWrapper::refreshLevel(int n, sf::Texture * pText)
 {
 	Asteroid * pCur;
 	sf::Vector2f v;
-	for (int i = 0; i < 4 + n; ++i)
+	for (int i = 0; i < 6 + n; ++i)
 	{
 		pCur = new Asteroid(pText);
 
@@ -283,7 +284,7 @@ void GameWrapper::drawAsteroidList(sf::RenderWindow & w)
 	while (pCur != nullptr)
 	{ // draw each asteroid as you move through the list
 		w.draw(pCur->getData()->getBody());
-		pCur->getData()->move();
+		//pCur->getData()->move();
 		pCur = pCur->getNext();
 	}
 }
@@ -294,10 +295,10 @@ void GameWrapper::drawLaserList(sf::RenderWindow & w) {
 	while (pCur != nullptr)
 	{ // draw each bullet as you move through
  		w.draw(pCur->getData()->getBody());
-		for (int i = 0; i < 3; ++i)
+		/*for (int i = 0; i < 3; ++i)
 		{
 			pCur->getData()->move();
-		}
+		}*/
 		pCur = pCur->getNext();
 	}
 }

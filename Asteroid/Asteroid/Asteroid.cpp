@@ -28,7 +28,7 @@ Asteroid::Asteroid(sf::Texture * texture) // Pass in pointer to spawning asteroi
 	// Sets the slope to a random vector w/ dX and dY less than 1
 	mSlope.x = (float)(rand() % 1000) / SLOPE_DIVISOR;
 	mSlope.y = (float)(rand() % 1000) / SLOPE_DIVISOR;
-	cout << "Slope: " << mSlope.x << ", " << mSlope.y << endl;
+	//cout << "Slope: " << mSlope.x << ", " << mSlope.y << endl;
 }
 
 // For creating a smaller asteroid upon the destruction of the bigger one
