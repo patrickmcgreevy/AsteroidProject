@@ -153,8 +153,8 @@ void GameWrapper::runGame()
 		}
 		if (spPressed && ((nCycles - lastShot) % 100 == 0))
 		{
-			lastShot = nCycles;
-			laserTemp = new Laser(mpLaserText, s1.getSlope(), s1.getTip());
+			lastShot = nCycles; 
+			laserTemp = new Laser(mpLaserText, s1.getSlope(), s1.getBody().getPosition());
 			laserTemp->getBody().setRotation(s1.getBody().getRotation());
 			mLaserList.insertAtFront(laserTemp);
 		}
