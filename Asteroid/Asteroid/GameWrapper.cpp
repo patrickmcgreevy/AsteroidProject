@@ -169,7 +169,8 @@ void GameWrapper::runGame()
 			pNextLaser = pCurLaser->getNext();
 			if (pCurLaser->getData()->checkRange()) // Allowed range exceeded
 			{
-				pPrevLaser = pCurLaser->getPrev();
+				mLaserList.deleteNode(pCurLaser);
+				/*pPrevLaser = pCurLaser->getPrev();
 				if (pNextLaser != nullptr)
 				{
 					pNextLaser->setPrev(pPrevLaser);
@@ -179,7 +180,7 @@ void GameWrapper::runGame()
 				{
 					pPrevLaser->setNext(pNextLaser);
 				}
-				delete pCurLaser;
+				delete pCurLaser;*/
 				//pCurLaser = pPrevLaser->getNext();
 			}
 			pCurLaser = pNextLaser;
