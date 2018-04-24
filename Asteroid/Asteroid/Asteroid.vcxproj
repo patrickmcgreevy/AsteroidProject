@@ -155,6 +155,7 @@
     <ClCompile Include="Laser.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Ship.cpp" />
+    <ClCompile Include="Stats.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Asteroid.h" />
@@ -165,6 +166,7 @@
     <ClInclude Include="Ship.h" />
     <ClInclude Include="StackNodeTemplate.h" />
     <ClInclude Include="StackTemplate.h" />
+    <ClInclude Include="Stats.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="asteroid-texture.png" />

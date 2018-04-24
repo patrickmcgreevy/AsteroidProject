@@ -23,7 +23,7 @@ public:
 	void updateSlope(double theta); // For setting direction of the mini stroids
 	void updateSlope(); // Don't call
 	
-
+	 
 	void move();
 	void boundCheck();
 private:

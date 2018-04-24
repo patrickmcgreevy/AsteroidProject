@@ -35,6 +35,8 @@ void GameWrapper::runGame()
 	sf::RenderWindow window(sf::VideoMode(WINDOW_X, WINDOW_Y), "Asteroid Game");
 	Ship s1;
 	Laser* laserTemp = nullptr;
+	Stats s;
+
 	int nCycles = 0, lastShot = 0, level = 0;
 
 	bool kp = false, wPressed = false, aPressed = false, dPressed = false, spPressed = false; // key pressed bool
@@ -182,7 +184,7 @@ void GameWrapper::runGame()
 
 		drawLaserList(window);
 		moveLaserList();
-
+		window.draw(s.getText());
 		drawAsteroidList(window);
 		moveAsteroidList();
 

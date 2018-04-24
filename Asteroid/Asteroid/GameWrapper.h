@@ -8,6 +8,7 @@
 #include "Ship.h"
 #include "List.h"
 #include <cmath>
+#include "stats.h"
 
 class GameWrapper
 {
