@@ -16,13 +16,12 @@ public:
 	~GameWrapper();
 
 	void runGame();
+	void garbageCollector();
 
 	void splitAsteroid(Asteroid * oldAst); // Makes two new asteroids based on the parameter asteroid
 	bool checkSplit(Asteroid * oldAst); // Returns true or false depending on 
 	
 	double checkDist(sf::Vector2f & v1, sf::Vector2f & v2);
-
-
 
 	bool checkCollision(Laser * laser, Asteroid * asteroid); // checks for laser vs asteroid collision; maybe kinda works
 	bool checkCollision(Ship * ship, Asteroid * asteroid); // checks for ship vs asteroid collision; maybe kinda works

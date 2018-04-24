@@ -24,9 +24,9 @@ GameWrapper::~GameWrapper()
 	delete mpLaserText;
 	delete mpBorderText;
 
-	std::cout << "Asteroid List" << std::endl;
+	//std::cout << "Asteroid List" << std::endl;
 	mAstList.~List();
-	std::cout << "Laser list" << std::endl;
+	//std::cout << "Laser list" << std::endl;
 	mLaserList.~List();
 }
 
@@ -191,6 +191,11 @@ void GameWrapper::runGame()
 		++nCycles;
 	}
 	std::cout << "App ended." << std::endl;
+}
+
+void GameWrapper::garbageCollector()
+{
+	//std::cout << "I am the garbage man!!!" << std::endl;
 }
 
 void GameWrapper::refreshLevel(int n, sf::Texture * pText)

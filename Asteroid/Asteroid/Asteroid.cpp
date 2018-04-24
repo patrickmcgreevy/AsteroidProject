@@ -43,7 +43,7 @@ Asteroid::Asteroid(sf::Texture * texture, sf::Vector2f & size) // Pass in pointe
 Asteroid::~Asteroid()
 {
 	//delete mText;
-	std::cout << "Inside asteroid destructor." << std::endl;
+	//std::cout << "Inside asteroid destructor." << std::endl;
 }
 
 sf::Sprite & Asteroid::getBody()
