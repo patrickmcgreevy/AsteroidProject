@@ -158,6 +158,9 @@ void GameWrapper::runGame()
 			laserTemp->getBody().setRotation(s1.getBody().getRotation());
 			mLaserList.insertAtFront(laserTemp);
 		}
+		if (nCycles % 100 == 0) {
+			astListBoundCheck();
+		}
 
 
 
@@ -307,4 +310,12 @@ bool GameWrapper::checkCollision(Laser * laser, Asteroid * asteroid) // maybe ki
 bool GameWrapper::checkCollision(Ship * ship, Asteroid * asteroid)
 {
 	return false;
+}
+
+void GameWrapper::astListBoundCheck() {
+	node<Asteroid*>* pCur = mAstList.getHead();
+	while (pCur != nullptr) {
+		pCur->getData()->boundCheck();
+		pCur = pCur->getNext();
+	}
 }

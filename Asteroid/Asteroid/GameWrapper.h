@@ -37,6 +37,8 @@ public:
 	void moveLaserList();
 	void moveAsteroidList(); // dosent work yet
 
+	void astListBoundCheck();
+
 
 	//void drawBorder(int score, int lives, sf::Texture * pText, sf::Font * pFont, sf::RenderWindow & window);
 private:
