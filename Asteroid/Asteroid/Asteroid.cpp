@@ -71,7 +71,26 @@ void Asteroid::updateSlope()
 }
 
 void Asteroid::move()
+
 {
 	mBody.move(mSlope);
+	double top = this->mBody.getPosition().y;
+	double bot = mBody.getPosition().y + mBody.getScale().y;
+	double left = mBody.getPosition().x;
+	double right = mBody.getPosition().x + mBody.getScale().x;
+
+	if (right < 0) {
+		mBody.setPosition(500, mBody.getPosition().y);
+	}
+	else if (left > 500) {
+		mBody.setPosition(1 - mBody.getScale().x, mBody.getPosition().y);
+	}
+
+	if (top > 500) {
+		mBody.setPosition(mBody.getPosition().x, 1 - mBody.getScale().y);
+	}
+	else if (bot < 0) {
+		mBody.setPosition(mBody.getPosition().x, 500);
+	}
 }
 
