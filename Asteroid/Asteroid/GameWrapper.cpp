@@ -339,19 +339,23 @@ double GameWrapper::checkDist(sf::Vector2f & v1, sf::Vector2f & v2)
 
 bool GameWrapper::checkCollision(Laser * laser, Asteroid * asteroid) // works
 {
-	double dist = 0;
+	double dist = 0, aTextW = 0, aTextH = 0;
 	sf::Vector2f vA, vB;
 	vA = laser->getBody().getPosition();
 	vB = asteroid->getBody().getPosition();
 
-	vA.x += 4;
-	vA.y += 10;
+	//vA.x += 4;
+	//vA.y += 10;
+	aTextW = asteroid->getBody().getTextureRect().width * asteroid->getBody().getScale().x;
+	aTextH = asteroid->getBody().getTextureRect().height * asteroid->getBody().getScale().y;
 
-	vB.x += asteroid->getBody().getTextureRect().width / 2;
-	vB.y += asteroid->getBody().getTextureRect().height / 2;
+
+	vB.x += aTextW/2;
+	vB.y += aTextH/2;
 
 	dist = checkDist(vA, vB);
-	if (dist > asteroid->getBody().getTextureRect().width / 2)
+	if (dist > (aTextW / 2))
+	//if(abs((vB.x - vA.x)) > (aTextW / 2) || abs((vB.y - vA.y)) > (aTextH / 2))
 	{
 		return false;
 	}
