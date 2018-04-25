@@ -35,10 +35,14 @@ void GameWrapper::runGame()
 	sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Asteroid Game");
 	Ship s1;
 	Laser* laserTemp = nullptr;
-
-	int nCycles = 0, lastShot = 0, level = 0;
+	window.requestFocus();
+	int nCycles = 0, lastShot = 0, level = 0, sheildTimer = 0;
 
 	bool kp = false, wPressed = false, aPressed = false, dPressed = false, spPressed = false; // key pressed bool
+	mScore.setScore(0);
+	mScore.setLives(3);
+	mAstList.~List();
+	mLaserList.~List();
 	while (window.isOpen())
 	{
 		++nCycles;
@@ -164,6 +168,12 @@ void GameWrapper::runGame()
 			laserTemp->getBody().setRotation(s1.getBody().getRotation());
 			mLaserList.insertAtFront(laserTemp);
 		}
+
+		if (mScore.getLives() <= 0) {
+			window.close();
+			std::cout << "\n\nGAME OVER\nFinal Score : " << mScore.getScore() << std::endl;
+			
+		}
 		// Checks the asteroids and ship for wrap around
 		if (nCycles % 100 == 0) {
 			astListBoundCheck();
@@ -190,8 +200,10 @@ void GameWrapper::runGame()
 		while (pCurA != nullptr)
 		{
 			// check ship collision
-			if (checkCollision(s1, pCurA->getData()))
+			if (checkCollision(s1, pCurA->getData()) && sheildTimer > 1000)
 			{
+				mScore.setLives(mScore.getLives()- 1);
+				sheildTimer = 0;
 				// Destroy the ship and decrement lives
 				// std::cout << "Ship-Asteroid collisioni." << std::endl;
 			}
@@ -231,6 +243,7 @@ void GameWrapper::runGame()
 		window.draw(s1.getBody());
 
 		window.display();
+		++sheildTimer;
 		//++nCycles;
 	}
 	std::cout << "App ended." << std::endl;
@@ -417,4 +430,25 @@ void GameWrapper::splitAsteroid(Asteroid * ast)
 		}
 	}
 	
+}
+
+void GameWrapper::mainMenu() {
+	int sel = 0;
+	do {
+		std::cout << "Welcome to Asteroids++" << std::endl << "Would you like to...\n\n" << "1 : Play game\n2 : See instruction\n3 : Exit\n";
+		do {
+			std::cin >> sel;
+		} while (sel != 1 && sel != 2 && sel != 3);
+		if (sel == 1) {
+			this->runGame();
+		}
+		else if (sel == 2) {
+			printInstructions();
+		}
+	} while (sel != 3);
+	return;
+}
+
+void GameWrapper::printInstructions() {
+	std::cout << "\nInstructions\nObjective: Shoot asteroids to score. Avoid asteroids to not die\n\nControls:\n\nMove Forward : W\nRotate right/left : A/d\nShoot : Space\n\n\n";
 }
