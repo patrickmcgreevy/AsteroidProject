@@ -392,7 +392,7 @@ bool GameWrapper::checkCollision(Ship & ship, Asteroid * asteroid)
 	vB.y += asteroid->getBody().getTexture()->getSize().y / 2;
 
 	dist = checkDist(vA, vB);
-	if (dist > asteroid->getBody().getTexture()->getSize().x)
+	if (dist > asteroid->getBody().getTexture()->getSize().x / 2)
 	{
 		return false;
 	}
