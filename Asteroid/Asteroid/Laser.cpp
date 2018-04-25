@@ -5,7 +5,6 @@
 
 Laser::Laser(sf::Texture * pText, sf::Vector2f slope, sf::Vector2f initialPos)
 {
-	//std::cout << "Inside Laser constructor." << std::endl;
 	mRangeExceded = false;
 
 	mpText = pText;
@@ -19,7 +18,6 @@ Laser::Laser(sf::Texture * pText, sf::Vector2f slope, sf::Vector2f initialPos)
 
 Laser::~Laser()
 {
-	//std::cout << "Inside Laser destructor." << std::endl;
 }
 
 bool Laser::checkRange()
@@ -32,24 +30,15 @@ sf::Sprite & Laser::getBody()
 	return mBody;
 }
 
-
 void Laser::move()
 {
-	double dX, dY, dHyp;
+	double dX, dY;
 
 	mBody.move(mSlope.x * (WINDOW_WIDTH / 250), mSlope.y * (WINDOW_HEIGHT / 250));
 
-	dX = mBody.getPosition().x - mInitialPos.x;
+	dX = mBody.getPosition().x - mInitialPos.x; // Sets the delta of x and y relative to their starting point
 	dY = mBody.getPosition().y - mInitialPos.y;
-	dHyp = pow(dX * dX + dY * dY, 1 / 2);
 
-	/*curX = mBody.getPosition().x;
-	curY = mBody.getPosition().y;
-	curHyp = pow(curX*curX + curY*curY, 1 / 2);*/
-	/*if (dHyp >= SCREEN_MAX_LEN)
-	{
-		mRangeExceded = true;
-	}*/
 	if (dX > WINDOW_WIDTH || dX < -WINDOW_WIDTH || dY > WINDOW_HEIGHT || dY < -WINDOW_HEIGHT)
 	{
  		mRangeExceded = true;

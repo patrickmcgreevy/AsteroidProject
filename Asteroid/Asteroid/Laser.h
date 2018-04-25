@@ -11,9 +11,9 @@ public:
 	~Laser();
 	sf::Sprite & getBody();
 
-	bool checkRange();
+	bool checkRange(); // Ensures that the Laser object has not gone too far
 
-	void move(); // shit works
+	void move(); // Changes the x and y coordinates of the object based on its slope and a modifier
 private:
 	sf::Sprite mBody;
 	sf::Texture *mpText;

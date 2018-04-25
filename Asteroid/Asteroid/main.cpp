@@ -5,20 +5,20 @@
 #include <thread>
 //#include <iostream>
 
-void garbageCollection(GameWrapper * game)
-{
-	//game->garbageCollector();
-	while (1)
-	{
-		std::cout << " bitches" << std::endl;
-	}
-}
+//void garbageCollection(GameWrapper * game)
+//{
+//	//game->garbageCollector();
+//	while (1)
+//	{
+//		std::cout << " bitches" << std::endl;
+//	}
+//}
 
 int main()
 {
 	GameWrapper gm;
-	void (*foo)(GameWrapper *);
-	foo = garbageCollection;
+	/*void (*foo)(GameWrapper *);*/
+	//foo = garbageCollection;
 
 	gm.mainMenu();
 

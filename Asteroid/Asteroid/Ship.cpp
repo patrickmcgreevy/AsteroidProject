@@ -20,9 +20,6 @@ Ship::Ship()
 	mBody.setPosition(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
 	updateSlope();
 	mBody.setOrigin(19, 33.5);
-	//updateSlope(mBody.getRotation());
-	/*mSlope.x = cos(mBody.getRotation());
-	mSlope.y = sin(mBody.getRotation());*/
 }
 
 Ship::~Ship()
@@ -61,37 +58,19 @@ void Ship::updateSlope() // theta is in degrees
 
 void Ship::rotateCW()
 {
-	//double vLen = ((mSlope.x) ^ 2 + (mSlope.y) ^ 2) ^ (1 / 2);
-	//double vLen = 
 	mBody.rotate(.25);
-	//sf::Vector2f newPos(mBody.getPosition().x + 21 * (1 - cos(mBody.getRotation() * (M_PI / 180))), mBody.getPosition().y + 21 * sin(mBody.getRotation() * (M_PI / 180)));
-	//sf::Vector2f pUpdate = mBody.getPosition();
-	/*pUpdate.x += cos(mBody.getRotation() * (M_PI / 180));
-	pUpdate.y += sin(mBody.getRotation() * (M_PI / 180));*/
 	updateSlope();
-
-	//mBody.setPosition(newPos);
 }
 
 void Ship::rotateCounterCW()
 {
 	sf::Vector2f pUpdate = mBody.getPosition();
-//	pUpdate.x += (mBody.getTexture()->getSize().x / 2) * cos(mBody.getRotation() * (M_PI / 180));
-//	pUpdate.y += (mBody.getTexture()->getSize().y / 2) * sin(mBody.getRotation() * (M_PI / 180));
 	mBody.rotate(-.25);
-
-	/*pUpdate.x -= cos(mBody.getRotation() * (M_PI / 180));
-	pUpdate.y -= sin(mBody.getRotation() * (M_PI / 180));*/
-
 	updateSlope();
-
-//	mBody.setPosition(pUpdate);
 }
 
 void Ship::move()
 {
-	// Update texture to rocket firing mode
-	//swapTexture();
 	mBody.move(mSlope.x * (WINDOW_WIDTH / 250), mSlope.y * (WINDOW_HEIGHT / 250));
 }
 
@@ -107,7 +86,7 @@ void Ship::swapTexture()
 	}
 }
 
-// return a vector with the position of the tip
+// return a vector with the position of the tip based on the ship's rotation
 sf::Vector2f Ship::getTip() {
 	float newx = this->getPos().x + 18*cos(mBody.getRotation() * (M_PI / 180));
 	float newy = this->getPos().y + 18 * sin(mBody.getRotation() * (M_PI / 180));

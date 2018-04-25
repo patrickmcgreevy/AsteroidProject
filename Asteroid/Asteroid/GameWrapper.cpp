@@ -24,9 +24,7 @@ GameWrapper::~GameWrapper()
 	delete mpLaserText;
 	delete mpBorderText;
 
-	//std::cout << "Asteroid List" << std::endl;
 	mAstList.~List();
-	//std::cout << "Laser list" << std::endl;
 	mLaserList.~List();
 }
 
@@ -62,11 +60,9 @@ void GameWrapper::runGame()
 			{
 				window.close();
 			}
-
-			else if (event.type == sf::Event::KeyPressed) // key pressed loop from aofallon
+			else if (event.type == sf::Event::KeyPressed)
 			{
 				kp = true;
-				//if (event.key.code == sf::Keyboard::Space)
 				if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 				{
 					if (!spPressed)
@@ -74,10 +70,6 @@ void GameWrapper::runGame()
 						lastShot = nCycles;
 					}
 					spPressed = true;
-
-					/*laserTemp = new Laser(mpLaserText, s1.getSlope(), s1.getTip());
-					laserTemp->getBody().setRotation(s1.getBody().getRotation());
-					mLaserList.insertAtFront(laserTemp);*/
 				}
 				else
 				{
@@ -119,7 +111,6 @@ void GameWrapper::runGame()
 				}
 				else
 				{
-					//lastShot = nCycles;
 					spPressed = false;
 				}
 				if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
@@ -148,7 +139,7 @@ void GameWrapper::runGame()
 				{
 					aPressed = false;
 				}
-			} // end of key stuff borught in
+			}
 		}
 
 		window.clear();
@@ -167,7 +158,6 @@ void GameWrapper::runGame()
 		}
 		if (spPressed && ((nCycles - lastShot) % 100 == 0) || (nCycles - lastShot) == 0)
 		{
-			//lastShot = nCycles; 
 			laserTemp = new Laser(mpLaserText, s1.getSlope(), s1.getBody().getPosition());
 			laserTemp->getBody().setRotation(s1.getBody().getRotation());
 			mLaserList.insertAtFront(laserTemp);
@@ -178,7 +168,7 @@ void GameWrapper::runGame()
 			std::cout << "GAME OVER\nFinal Score : " << mScore.getScore() << "\n\n";
 			
 		}
-		// Checks the asteroids and ship for wrap around
+		// Checks the asteroids and ship for wrap around every 100 cycles
 		if (nCycles % 100 == 0) {
 			astListBoundCheck();
 			s1.boundCheck();
@@ -209,9 +199,8 @@ void GameWrapper::runGame()
 				mScore.setLives(mScore.getLives()- 1);
 				sheildTimer = 0;
 				// Destroy the ship and decrement lives
-				// std::cout << "Ship-Asteroid collisioni." << std::endl;
 			}
-			pCurL = mLaserList.getHead();
+			pCurL = mLaserList.getHead(); // sets the current laser to the head laser
 			while (pCurL != nullptr && pCurA != nullptr)
 			{
 				if (checkCollision(pCurL->getData(), pCurA->getData()))
@@ -220,42 +209,35 @@ void GameWrapper::runGame()
 					{
 						splitAsteroid(pCurA->getData());
 					}
-					pTempA = pCurA->getNext();
-					mAstList.deleteNode(pCurA);
-					mLaserList.deleteNode(pCurL);
-					pCurA = pTempA;
-					pCurL = nullptr;
-					mScore.setScore(mScore.getScore() + 1);
+					pTempA = pCurA->getNext(); // Temp is set to the next asteroid
+					mAstList.deleteNode(pCurA); // The current asteroid is deleted
+					mLaserList.deleteNode(pCurL); // The destroying laser is deleted
+					pCurA = pTempA; // the current asteroid becomes the temporary asteroid
+					pCurL = nullptr; // current laser is set to nullptr so that every laser is checked against the new current asteroid
+					mScore.setScore(mScore.getScore() + 1); // increments score
 				}
 				else
 				{
-					pCurL = pCurL->getNext();
+					pCurL = pCurL->getNext(); // moves the laser to the next position
 				}
 			}
 			if (pCurA != nullptr)
 			{
-				pCurA = pCurA->getNext();
+				pCurA = pCurA->getNext(); // moves to the next asteroid if it isn't at the end of the list
 			}
 		}
 
-		drawLaserList(window);
-		moveLaserList();
-		window.draw(mScore.getText());
-		drawAsteroidList(window);
-		moveAsteroidList();
+		drawLaserList(window); // Draws all lasers
+		moveLaserList(); // moves all lasers
+		window.draw(mScore.getText()); // draws the score
+		drawAsteroidList(window); // draws all the asteroids
+		moveAsteroidList(); // moves all the asteroids
 
-		window.draw(s1.getBody());
+		window.draw(s1.getBody()); // draws teh ship's sprite
 
-		window.display();
+		window.display(); // displays what has been printed to the window
 		++sheildTimer;
-		//++nCycles;
 	}
-	//std::cout << "App ended." << std::endl;
-}
-
-void GameWrapper::garbageCollector()
-{
-	//std::cout << "I am the garbage man!!!" << std::endl;
 }
 
 void GameWrapper::refreshLevel(int & n, sf::Texture * pText)
@@ -290,8 +272,6 @@ void GameWrapper::refreshLevel(int & n, sf::Texture * pText)
 			pCur->getSlope().x = pCur->getSlope().x * -1;
 			pCur->getSlope().y = pCur->getSlope().y * -1;
 		}
-		/*v.x = 250;
-		v.y = 250;*/
 
 		pCur->getBody().setPosition(v);
 		mAstList.insertAtFront(pCur);
@@ -306,7 +286,6 @@ void GameWrapper::drawAsteroidList(sf::RenderWindow & w)
 	while (pCur != nullptr)
 	{ // draw each asteroid as you move through the list
 		w.draw(pCur->getData()->getBody());
-		//pCur->getData()->move();
 		pCur = pCur->getNext();
 	}
 }
@@ -317,10 +296,6 @@ void GameWrapper::drawLaserList(sf::RenderWindow & w) {
 	while (pCur != nullptr)
 	{ // draw each bullet as you move through
  		w.draw(pCur->getData()->getBody());
-		/*for (int i = 0; i < 3; ++i)
-		{
-			pCur->getData()->move();
-		}*/
 		pCur = pCur->getNext();
 	}
 }
@@ -361,8 +336,6 @@ bool GameWrapper::checkCollision(Laser * laser, Asteroid * asteroid) // works
 	vA = laser->getBody().getPosition();
 	vB = asteroid->getBody().getPosition();
 
-	//vA.x += 4;
-	//vA.y += 10;
 	aTextW = asteroid->getBody().getTextureRect().width * asteroid->getBody().getScale().x;
 	aTextH = asteroid->getBody().getTextureRect().height * asteroid->getBody().getScale().y;
 
@@ -371,8 +344,7 @@ bool GameWrapper::checkCollision(Laser * laser, Asteroid * asteroid) // works
 	vB.y += aTextH/2;
 
 	dist = checkDist(vA, vB);
-	if (dist > (aTextW / 2))
-	//if(abs((vB.x - vA.x)) > (aTextW / 2) || abs((vB.y - vA.y)) > (aTextH / 2))
+	if (dist > (aTextW / 2)) // checks if the distance between the points is less than the radius of the asteroid sprite
 	{
 		return false;
 	}
@@ -389,11 +361,11 @@ bool GameWrapper::checkCollision(Ship & ship, Asteroid * asteroid)
 	vA = ship.getBody().getPosition();
 	vB = asteroid->getBody().getPosition();
 
-	vA.x += ship.getBody().getTexture()->getSize().x / 2;
+	vA.x += ship.getBody().getTexture()->getSize().x / 2; // adds to x and y the radius of the sprite texture
 	vA.y += ship.getBody().getTexture()->getSize().y / 2;
 
-	vB.x += (asteroid->getBody().getTexture()->getSize().x * asteroid->getBody().getScale().x) / 2;
-	vB.y += (asteroid->getBody().getTexture()->getSize().y * asteroid->getBody().getScale().y) / 2;
+	vB.x += (asteroid->getBody().getTexture()->getSize().x * asteroid->getBody().getScale().x) / 2; // adds to x the radius of the asteroid sprite
+	vB.y += (asteroid->getBody().getTexture()->getSize().y * asteroid->getBody().getScale().y) / 2; // ands to y the radius of the asteroid sprite
 
 	dist = checkDist(vA, vB);
 	if (dist > asteroid->getBody().getTexture()->getSize().x / 3)
@@ -409,12 +381,12 @@ bool GameWrapper::checkCollision(Ship & ship, Asteroid * asteroid)
 void GameWrapper::astListBoundCheck() {
 	node<Asteroid*>* pCur = mAstList.getHead();
 	while (pCur != nullptr) {
-		pCur->getData()->boundCheck();
+		pCur->getData()->boundCheck(); // corrects for the bounds
 		pCur = pCur->getNext();
 	}
 }
 
-bool GameWrapper::checkSplit(Asteroid * a)
+bool GameWrapper::checkSplit(Asteroid * a) // checks if the asteroid may be split
 {
 	if (a->getParts() > 0)
 	{
@@ -426,7 +398,7 @@ bool GameWrapper::checkSplit(Asteroid * a)
 void GameWrapper::splitAsteroid(Asteroid * ast)
 {
 	ast->setParts(ast->getParts() - 1);
-	for (int i = 0; i < 2; ++i)
+	for (int i = 0; i < 2; ++i) // Adds two smaller asteroids to the asteroid list
 	{
 		Asteroid * pNew = new Asteroid(ast->getmText());
 		if (pNew != nullptr)
@@ -442,20 +414,26 @@ void GameWrapper::splitAsteroid(Asteroid * ast)
 
 void GameWrapper::mainMenu() {
 	int sel = 0;
+	char c;
+	bool run = true;
 	do {
 		std::cout << "Welcome to Asteroids++" << std::endl << "Would you like to...\n\n" << "1 : Play game\n2 : See instruction\n3 : Exit\n";
 		do {
-			std::cin >> sel;
-		} while (sel != 1 && sel != 2 && sel != 3);
-		if (sel == 1) {
+			std::cin >> c;
+		} while (c != '1' && c != '2' && c != '3');
+		if (c == '1') {
 			system("cls");
 			this->runGame();
 		}
-		else if (sel == 2) {
+		else if (c == '2') {
 			system("cls");
 			printInstructions();
 		}
-	} while (sel != 3);
+		else if (c == '3')
+		{
+			run = false;
+		}
+	} while (run);
 	return;
 }
 

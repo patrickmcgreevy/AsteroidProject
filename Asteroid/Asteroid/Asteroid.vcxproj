@@ -167,8 +167,6 @@
     <ClInclude Include="ListNode.h" />
     <ClInclude Include="Ship.h" />
     <ClInclude Include="SlopeObject.h" />
-    <ClInclude Include="StackNodeTemplate.h" />
-    <ClInclude Include="StackTemplate.h" />
     <ClInclude Include="Stats.h" />
     <ClInclude Include="Universal.h" />
   </ItemGroup>

@@ -44,12 +44,6 @@
     <ClInclude Include="Ship.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="StackNodeTemplate.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="StackTemplate.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="List.h">
       <Filter>Header Files</Filter>
     </ClInclude>

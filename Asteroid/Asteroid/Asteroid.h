@@ -1,11 +1,6 @@
-// Asteroid class contains information for display and motioin
-// does not move itself
-
 #pragma once
 #define _USE_MATH_DEFINES
 #include "SlopeObject.h"
-//#include <SFML/Graphics.hpp>
-//#include <SFML/Graphics/Sprite.hpp>
 #include <cmath>
 #include <iostream>
 #include <random>
@@ -23,18 +18,15 @@ public:
 	sf::Vector2f & getSlope();
 
 	sf::Texture * getmText();
-	int getParts();
-	void setParts(int n);
+	int getParts(); // How many more times the asteroid may be split
+	void setParts(int n); // Sets the number of times the asteroid may be split
 
 	void updateSlope(double theta); // For setting direction of the mini stroids
 	void updateSlope(); // Don't call
 	
 	 
-	void move();
-	//void boundCheck(); //inherits one from BoundedObject class
+	void move(); // Changes the x and y coordinates of the object based on its slope and a modifier
 private:
-	//sf::Sprite mBody;
 	sf::Texture *mText;
-	int nParts;
-	//sf::Vector2f mSlope;
+	int nParts; // The number of times the asteroid may be split
 };

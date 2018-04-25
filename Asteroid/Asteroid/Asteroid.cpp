@@ -17,10 +17,9 @@ Asteroid::Asteroid()
 	// Sets the slope to a random vector w/ dX and dY less than 1
 	mSlope.x = (float)(rand() % 1000) / SLOPE_DIVISOR;
 	mSlope.y = (float)(rand() % 1000) / SLOPE_DIVISOR;
-	//cout << "Slope: " << mSlope.x << ", " << mSlope.y << endl;
 }
 
-Asteroid::Asteroid(sf::Texture * texture) // Pass in pointer to spawning asteroid's texture and the asteroid's sprite's vector
+Asteroid::Asteroid(sf::Texture * texture) // Pass in pointer to spawning asteroid's texture
 {
 	mBody.setTexture(*texture);
 	mText = texture;
@@ -29,7 +28,6 @@ Asteroid::Asteroid(sf::Texture * texture) // Pass in pointer to spawning asteroi
 	mSlope.x = (float)(rand() % 1000) / SLOPE_DIVISOR;
 	mSlope.y = (float)(rand() % 1000) / SLOPE_DIVISOR;
 	nParts = 2;
-	//cout << "Slope: " << mSlope.x << ", " << mSlope.y << endl;
 }
 
 // For creating a smaller asteroid upon the destruction of the bigger one
@@ -43,8 +41,6 @@ Asteroid::Asteroid(sf::Texture * texture, sf::Vector2f & size) // Pass in pointe
 
 Asteroid::~Asteroid()
 {
-	//delete mText;
-	//std::cout << "Inside asteroid destructor." << std::endl;
 }
 
 sf::Sprite & Asteroid::getBody()
@@ -60,7 +56,7 @@ sf::Vector2f & Asteroid::getSlope()
 void Asteroid::updateSlope(double theta)
 {
 	theta = theta * (M_PI / 180); // gets theta in radians
-	mSlope.y = cos(theta);
+	mSlope.y = cos(theta); // Sets the slope to be an angle according to theta so that x and y vary based on rotation
 	mSlope.x = sin(theta);
 }
 
@@ -72,7 +68,6 @@ void Asteroid::updateSlope()
 }
 
 void Asteroid::move()
-
 {
 	mBody.move(mSlope.x * (WINDOW_WIDTH / 250), mSlope.y * (WINDOW_WIDTH / 250));
 }
@@ -91,23 +86,3 @@ sf::Texture * Asteroid::getmText()
 {
 	return mText;
 }
-//void Asteroid::boundCheck() {
-//	double top = this->mBody.getPosition().y;
-//	double bot = mBody.getPosition().y + 146;
-//	double left = mBody.getPosition().x;
-//	double right = mBody.getPosition().x + 160;
-//
-//	if (right < 0) {
-//		mBody.setPosition(500, mBody.getPosition().y);
-//	}
-//	else if (left > 500) {
-//		mBody.setPosition(-159, mBody.getPosition().y);
-//	}
-//
-//	if (top > 500) {
-//		mBody.setPosition(mBody.getPosition().x, -145);
-//	}
-//	else if (bot < 0) {
-//		mBody.setPosition(mBody.getPosition().x, 500);
-//	}
-//}

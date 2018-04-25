@@ -13,7 +13,7 @@ public:
 	void setLives(int newLives);
 	void setScore(int newScore);
 	sf::Text& getText();
-	void updateText();
+	void updateText(); // Refreshes the text to be displayed
 private:
 	std::ostringstream sStream;
 	sf::Text mText;

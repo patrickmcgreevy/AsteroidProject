@@ -1,7 +1,8 @@
 #pragma once
 #include "Stats.h"
 
-Stats::Stats() {
+Stats::Stats() 
+{
 	mFont.loadFromFile("Roboto-Regular.ttf");
 	mText.setFont(mFont);
 	mText.setCharacterSize(15);
@@ -11,14 +12,15 @@ Stats::Stats() {
 	mLives = 3;
 	mScore = 0;
 	updateText();
-	
 }
 
-Stats::~Stats() {
+Stats::~Stats() 
+{
 
 }
 
-void Stats::updateText() {
+void Stats::updateText() 
+{
 	sStream.str("");
 	sStream << "Lives : " << mLives << "\nScore : " << mScore;
 	mText.setString(sStream.str());
@@ -33,11 +35,9 @@ int Stats::getLives() {
 	return mLives;
 }
 
-
 sf::Text& Stats::getText() {
 	return mText;
 }
-
 
 void Stats::setScore(int newScore) {
 	mScore = newScore;

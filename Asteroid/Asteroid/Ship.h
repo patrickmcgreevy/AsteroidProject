@@ -13,21 +13,19 @@ public:
 
 	sf::Sprite & getBody();
 
-	void updateSlope(double theta); // Pass in the rotatoin of mBody
-	void updateSlope();
-	void swapTexture();
+	void updateSlope(double theta); // Pass in the rotation of mBody
+	void updateSlope(); // Changes the slope based on the sprite's rotation
+	void swapTexture(); // Swaps the textures of the ship
 
-	sf::Vector2f & getSlope();
-	const sf::Vector2f & getPos();
-	sf::Vector2f getTip();
+	sf::Vector2f & getSlope(); // Retuns the vector that is the ship's slope
+	const sf::Vector2f & getPos(); // returns the vector cooresponding to the ship's posiiton
+	sf::Vector2f getTip(); // Returns a vector cooresponding to the tip of the ship's texture
 
-	void move();
+	void move(); // Changes the x and y coordinates of the object based on its slope and a modifier
 
 	void rotateCW(); // Rotate clock wise about the center of the ship; currently not working as intended
 	void rotateCounterCW(); // Rotate counter clock wise about the center of the ship; currently not working as intended
 private:
-	//sf::Sprite mBody;
 	sf::Texture *mText;
 	sf::Texture *mText2;
-	//sf::Vector2f mSlope; // Length of vector should always be equal to one. Or maybe less. Should be constant?
 };

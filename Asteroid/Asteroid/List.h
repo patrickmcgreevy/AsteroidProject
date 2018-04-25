@@ -20,20 +20,17 @@ private:
 	void destrucorHelper();
 
 	node<T>* mpHead;
-	//node<T>* mpTail;
 };
 
 template <class T>
 List<T>::List()
 {
 	mpHead = nullptr;
-	//mpTail = nullptr;
 }
 
 template <class T>
 List<T>::~List()
 {
-	//std::cout << "Inside List destructor." << std::endl;
 	while (mpHead != nullptr)
 	{
 		destrucorHelper();
