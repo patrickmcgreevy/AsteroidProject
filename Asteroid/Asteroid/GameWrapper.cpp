@@ -43,10 +43,6 @@ void GameWrapper::runGame()
 	mLaserList.~List();
 	while (window.isOpen())
 	{
-		while (!window.hasFocus())
-		{
-
-		}
 		++nCycles;
 
 		sf::Event event;
@@ -237,6 +233,10 @@ void GameWrapper::runGame()
 
 		window.display(); // displays what has been printed to the window
 		++sheildTimer;
+		while (!window.hasFocus())
+		{
+
+		}
 	}
 }
 
