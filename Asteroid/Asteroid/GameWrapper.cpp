@@ -171,7 +171,7 @@ void GameWrapper::runGame()
 
 		if (mScore.getLives() <= 0) {
 			window.close();
-			std::cout << "\n\nGAME OVER\nFinal Score : " << mScore.getScore() << std::endl;
+			std::cout << "GAME OVER\nFinal Score : " << mScore.getScore() << "\n\n";
 			
 		}
 		// Checks the asteroids and ship for wrap around
@@ -246,7 +246,7 @@ void GameWrapper::runGame()
 		++sheildTimer;
 		//++nCycles;
 	}
-	std::cout << "App ended." << std::endl;
+	//std::cout << "App ended." << std::endl;
 }
 
 void GameWrapper::garbageCollector()
@@ -444,9 +444,11 @@ void GameWrapper::mainMenu() {
 			std::cin >> sel;
 		} while (sel != 1 && sel != 2 && sel != 3);
 		if (sel == 1) {
+			system("cls");
 			this->runGame();
 		}
 		else if (sel == 2) {
+			system("cls");
 			printInstructions();
 		}
 	} while (sel != 3);
@@ -454,5 +456,5 @@ void GameWrapper::mainMenu() {
 }
 
 void GameWrapper::printInstructions() {
-	std::cout << "\nInstructions\nObjective: Shoot asteroids to score. Avoid asteroids to not die\n\nControls:\n\nMove Forward : W\nRotate right/left : A/d\nShoot : Space\n\n\n";
+	std::cout << "Instructions\nObjective: Shoot asteroids to score. Avoid asteroids to not die\n\nControls:\n\nMove Forward : W\nRotate right/left : A/d\nShoot : Space\n\n\n";
 }
