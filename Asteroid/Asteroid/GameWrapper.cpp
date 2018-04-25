@@ -45,6 +45,10 @@ void GameWrapper::runGame()
 	mLaserList.~List();
 	while (window.isOpen())
 	{
+		while (!window.hasFocus())
+		{
+
+		}
 		++nCycles;
 
 		sf::Event event;
@@ -388,11 +392,11 @@ bool GameWrapper::checkCollision(Ship & ship, Asteroid * asteroid)
 	vA.x += ship.getBody().getTexture()->getSize().x / 2;
 	vA.y += ship.getBody().getTexture()->getSize().y / 2;
 
-	vB.x += asteroid->getBody().getTexture()->getSize().x / 2;
-	vB.y += asteroid->getBody().getTexture()->getSize().y / 2;
+	vB.x += (asteroid->getBody().getTexture()->getSize().x * asteroid->getBody().getScale().x) / 2;
+	vB.y += (asteroid->getBody().getTexture()->getSize().y * asteroid->getBody().getScale().y) / 2;
 
 	dist = checkDist(vA, vB);
-	if (dist > asteroid->getBody().getTexture()->getSize().x / 2)
+	if (dist > asteroid->getBody().getTexture()->getSize().x / 3)
 	{
 		return false;
 	}
