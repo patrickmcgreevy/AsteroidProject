@@ -40,6 +40,8 @@ public:
 
 	void astListBoundCheck();
 
+	void mainMenu();
+	void printInstructions();
 
 	//void drawBorder(int score, int lives, sf::Texture * pText, sf::Font * pFont, sf::RenderWindow & window);
 private:

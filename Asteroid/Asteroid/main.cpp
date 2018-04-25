@@ -20,8 +20,10 @@ int main()
 	void (*foo)(GameWrapper *);
 	foo = garbageCollection;
 
+	gm.mainMenu();
+
 	//std::thread garbageThread(foo, &gm);
-	gm.runGame();
+	//gm.runGame();
 	/*
 	sf::Texture * pLaserTexture = new sf::Texture();
 	sf::Texture * pAsteroidTexture = new sf::Texture();
